@@ -1,0 +1,26 @@
+class <%= @class_name %> < ActiveLrs::Statement
+
+  <%#- Create profile verbs hash -%>
+  VERBS = {
+    <%- @verbs.each do |verb| -%>
+      <%= ":" + verb[:name].parameterize.underscore %> => "<%= verb[:iri] %>",
+    <%- end -%>
+  }.freeze
+
+  <%#- Create class methods -%>
+  <%- @verbs.each do |verb| -%>
+  <%- method_name = verb[:name].parameterize.underscore -%>
+
+  def self.<%= method_name %>
+    all.<%= method_name %>
+  end
+  <%- end -%>
+  <%#- Create instance methods -%>
+  <%- @verbs.each do |verb| -%>
+  <%- method_name = verb[:name].parameterize.underscore -%>
+
+  def <%= method_name %>
+    where("verb.id": VERBS[:<%= method_name %>])
+  end
+  <%- end -%>
+end

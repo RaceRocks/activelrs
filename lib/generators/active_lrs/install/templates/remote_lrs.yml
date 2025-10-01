@@ -1,0 +1,17 @@
+development:
+  endpoints:
+    - name: lrs1
+      url: https://dev1.example.com/xapi
+      username: dev_user
+      password: secret
+    - name: lrs2
+      url: https://dev2.example.com/xapi
+      username: dev_user
+      password: secret
+
+production:
+  endpoints:
+    - name: example
+      url: https://prod.example.com/xapi
+      username: prod_user
+      password: prod_secret

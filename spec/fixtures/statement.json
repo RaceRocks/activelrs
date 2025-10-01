@@ -1,0 +1,86 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "actor": {
+    "objectType": "Agent",
+    "name": "Ganesh Mysore",
+    "mbox": "mailto:ganesh@example.com",
+    "account": {
+      "homePage": "https://example-lms.com",
+      "name": "ganesh123"
+    }
+  },
+  "verb": {
+    "id": "http://adlnet.gov/expapi/verbs/passed",
+    "display": {
+      "en-US": "passed",
+      "fr-FR": "réussi"
+    }
+  },
+  "object": {
+    "id": "http://example.com/courses/rails-intro/quiz-final",
+    "objectType": "Activity",
+    "definition": {
+      "name": {
+        "en-US": "Final Quiz",
+        "es-ES": "Examen Final"
+      },
+      "description": {
+        "en-US": "The final quiz for the Rails introduction course.",
+        "es-ES": "El examen final del curso de introducción a Rails."
+      },
+      "type": "http://adlnet.gov/expapi/activities/assessment",
+      "moreInfo": "http://example.com/courses/rails-intro/final-quiz-info"
+    }
+  },
+  "result": {
+    "score": {
+      "scaled": 0.85,
+      "raw": 85,
+      "min": 0,
+      "max": 100
+    },
+    "success": true,
+    "completion": true,
+    "response": "42",
+    "duration": "PT35M"
+  },
+  "context": {
+    "registration": "760e3480-ba55-4991-94b0-01820dbd23a2",
+    "instructor": {
+      "objectType": "Agent",
+      "name": "Dr. Instructor",
+      "mbox": "mailto:instructor@example.com"
+    },
+    "team": {
+      "objectType": "Group",
+      "name": "Study Group 1",
+      "mbox": "mailto:group1@example.com"
+    },
+    "contextActivities": {
+      "parent": [
+        {
+          "id": "http://example.com/courses/rails-intro",
+          "objectType": "Activity"
+        }
+      ],
+      "grouping": [
+        {
+          "id": "http://example.com/programs/web-dev-bootcamp",
+          "objectType": "Activity"
+        }
+      ]
+    },
+    "extensions": {
+      "http://example.com/extensions/location": "Vancouver Campus",
+      "http://example.com/extensions/device": "iPad Pro"
+    }
+  },
+  "timestamp": "2025-08-26T19:15:00Z",
+  "stored": "2025-08-26T19:15:05Z",
+  "authority": {
+    "objectType": "Agent",
+    "name": "LRS Admin",
+    "mbox": "mailto:admin@example-lrs.com"
+  },
+  "version": "2.0.0"
+}
