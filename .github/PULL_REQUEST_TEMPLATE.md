@@ -11,7 +11,7 @@ Link any issues that this PR addresses.
 - [ ] Refactor / Code improvement
 
 ## Checklist
-- [ ] I have read the [CONTRIBUTING.md](.github/CONTRIBUTING.md) and followed the guidelines
+- [ ] I have read the [CONTRIBUTING.md](https://github.com/RaceRocks/activelrs/blob/main/CONTRIBUTING.md) and followed the guidelines
 - [ ] Tests added / updated (if applicable)
 - [ ] Documentation updated (if applicable)
 - [ ] Linting / CI passes

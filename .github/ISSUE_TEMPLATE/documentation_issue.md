@@ -19,4 +19,4 @@ Describe the fix, update, or addition you suggest.
 Any other context or references.
 
 ## Useful Resources
-Refer to our [CONTRIBUTING.md](../CONTRIBUTING.md) for guidance.
+Refer to our [CONTRIBUTING.md](https://github.com/RaceRocks/activelrs/blob/main/CONTRIBUTING.md) for guidance.
