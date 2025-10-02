@@ -60,8 +60,9 @@ ActiveLrs.configuration.xapi_profile_server_url # => "https://profiles.adlnet.go
 ```
 
 ## Generators
-
-### `rails generate active_lrs:statement <xAPI Profile IRI>`
+```bash
+rails generate active_lrs:statement <xAPI_Profile_IRI>
+```
 
 This generator will fetch an xAPI profile from the [xAPI profile server API](https://profiles.adlnet.gov/api-info/get/by-iri), and create a model within your application (`/app/models/<profile_name>_statement.rb`). Generated models contain helpers to make querying statements easier.
 
