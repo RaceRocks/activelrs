@@ -117,6 +117,11 @@ bundle exec rubocop path/to/file.rb
 bundle exec rubocop -A
 ```
 
+## ## Attribution
+
+This project includes code derived from [Xapi](https://github.com/Deakin-Prime/Xapi), 
+licensed under MIT. We have modified it for our use case.
+
 ## License
 
 The MIT License (MIT).  
