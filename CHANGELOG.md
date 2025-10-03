@@ -10,4 +10,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Generator for plain Ruby model classes from xAPI profiles.
 - Auto-generated RSpec test files for each model.
 - Ability to fetch xAPI statements matching events defined in an xAPI profile.
-- Basic documentation ([view docs](https://www.rubydoc.info/github/RaceRocks/activelrs)).
+- Basic documentation ([view docs](https://racerocks.github.io/activelrs)).
