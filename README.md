@@ -69,6 +69,11 @@ This generator will fetch an xAPI profile from the [xAPI profile server API](htt
 > [!TIP]
 > You can find xAPI profiles and their IRIs [here](https://profiles.adlnet.gov/profiles).
 
+## Documentation
+
+For a full list of available functionality, usage details, and examples, please check out the [documentation](https://racerocks.github.io/activelrs).  
+This is the best place to explore all classes, modules, and methods provided by the library.
+
 ## Development
 
 ### 1. Clone the repository
@@ -91,7 +96,6 @@ Build gem
 ```bash
 gem build active_lrs.gemspec
 ```
-
 
 ## Testing and Quality Assurance
 
@@ -117,7 +121,7 @@ bundle exec rubocop path/to/file.rb
 bundle exec rubocop -A
 ```
 
-## ## Attribution
+## Attribution
 
 This project includes code derived from [Xapi](https://github.com/Deakin-Prime/Xapi), 
 licensed under MIT. We have modified it for our use case.
