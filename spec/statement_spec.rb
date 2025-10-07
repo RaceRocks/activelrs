@@ -100,5 +100,36 @@ RSpec.describe ActiveLrs::Statement do
       results = ActiveLrs::Statement.limit(1)
       expect(results.to_a.size).to eq(1)
     end
+
+    it "can count statements" do
+      results = ActiveLrs::Statement.count
+      expect(results).to eq(5)
+    end
+
+    it "can count simple queries" do
+      results = ActiveLrs::Statement.where("actor.name": "John Doe").count
+      expect(results).to eq(5)
+    end
+
+    it "can count chained queries" do
+      results = ActiveLrs::Statement
+        .where("verb.id": "http://adlnet.gov/expapi/verbs/initialized")
+        .since("2016-01-01T15:34:25.541Z")
+        .count
+      expect(results).to eq(1)
+    end
+
+    it "respects limit when counting" do
+      results = ActiveLrs::Statement.limit(3).count
+      expect(results).to eq(3)
+    end
+
+    it "cannot query a counted query" do
+      expect do
+        ActiveLrs::Statement.where("actor.name": "John Doe")
+                            .count
+                            .where("verb.id": "http://adlnet.gov/expapi/verbs/launched")
+      end.to raise_error(NoMethodError)
+    end
   end
 end
