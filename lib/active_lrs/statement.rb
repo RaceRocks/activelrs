@@ -112,9 +112,14 @@ module ActiveLrs
 
     # Shortcut for 'count' on a new instance.
     #
+    # @param conditions [Hash] Filtering conditions
     # @return [Integer]
-    def self.count()
-      new.count
+    def self.count(conditions = {})
+      if conditions.empty?
+        new.count
+      else
+        new.where(conditions).count
+      end
     end
 
     # @!endgroup
