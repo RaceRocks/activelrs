@@ -52,7 +52,7 @@ jobs:
       - name: Deploy versioned docs
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACTIVE_LRS_GH_PAGES_TOKEN }}
           publish_dir: ./doc
           destination_dir: ${{ env.VERSION }}
           keep_files: true
@@ -61,7 +61,7 @@ jobs:
       - name: Deploy latest docs
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACTIVE_LRS_GH_PAGES_TOKEN }}
           publish_dir: ./doc
           destination_dir: latest
           keep_files: true
@@ -75,6 +75,6 @@ jobs:
       - name: Deploy root redirect
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACTIVE_LRS_GH_PAGES_TOKEN }}
           publish_dir: ./gh-pages-root
           keep_files: true
