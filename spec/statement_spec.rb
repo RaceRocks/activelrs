@@ -119,9 +119,14 @@ RSpec.describe ActiveLrs::Statement do
       expect(results).to eq(1)
     end
 
-    it "respects limit when counting" do
-      results = ActiveLrs::Statement.limit(3).count
-      expect(results).to eq(3)
+    it "can count statements given a single condition" do
+      results = ActiveLrs::Statement.count("actor.name": "John Doe")
+      expect(results).to eq(5)
+    end
+
+    it "can count statements given multiple conditions" do
+      results = ActiveLrs::Statement.count("actor.name": "John Doe", "verb.id": "http://adlnet.gov/expapi/verbs/launched")
+      expect(results).to eq(1)
     end
 
     it "cannot query a counted query" do
