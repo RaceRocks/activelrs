@@ -58,7 +58,8 @@ module ActiveLrs
           url: lrs["url"],
           username: lrs["username"],
           password: lrs["password"],
-          more_attribute: lrs["more_attribute"] || "more"
+          more_attribute: lrs["more_attribute"] || "more",
+          version: lrs["version"] || "2.0.0"
         )
 
         statements.concat(self::VERBS.values.flat_map do |iri|

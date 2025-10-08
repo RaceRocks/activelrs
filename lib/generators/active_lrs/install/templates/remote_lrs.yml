@@ -5,11 +5,13 @@ development:
       username: dev_user
       password: secret
       more_attribute: more
+      version: 2.0.0
     - name: lrs2
       url: https://dev2.example.com/xapi
       username: dev_user
       password: secret
       more_attribute: pagination.more
+      version: 1.2.0
 
 production:
   endpoints:
@@ -18,3 +20,4 @@ production:
       username: prod_user
       password: prod_secret
       more_attribute: more
+      version: 2.0.0

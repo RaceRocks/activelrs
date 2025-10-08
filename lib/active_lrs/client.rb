@@ -29,6 +29,9 @@ module ActiveLrs
     # @return [String] The attribute path for pagination (e.g., "more" or "pagination.more")
     attr_reader :more_attribute
 
+    # @return [String] The xAPI version to use
+    attr_reader :version
+
     # @return [Faraday::Connection] The Faraday connection instance
     attr_reader :connection
 
@@ -41,14 +44,16 @@ module ActiveLrs
     # @param username [String] Username for Basic Authentication
     # @param password [String] Password for Basic Authentication
     # @param more_attribute [String] Attribute path for pagination URL (defaults to "more")
+    # @param version [String] The xAPI version (defaults to "2.0.0")
     # @param options [Hash] Optional Faraday connection options
     #
     # @return [void]
-    def initialize(url:, username:, password:, more_attribute: "more", options: {})
+    def initialize(url:, username:, password:, more_attribute: "more", version: "2.0.0", options: {})
       @base_url = url
       @username = username
       @password = password
       @more_attribute = more_attribute
+      @version = version
       @connection = build_connection(options)
     end
 
@@ -58,7 +63,7 @@ module ActiveLrs
     # @return [Faraday::Connection] Configured Faraday connection
     def build_connection(options)
       Faraday.new(url: base_url, **options) do |conn|
-        conn.headers["X-Experience-API-Version"] = "2.0.0"
+        conn.headers["X-Experience-API-Version"] = version
         conn.response :json
         conn.request :authorization, :basic, username, password
         conn.adapter Faraday.default_adapter
