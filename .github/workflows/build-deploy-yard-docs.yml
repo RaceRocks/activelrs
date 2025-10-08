@@ -1,0 +1,80 @@
+name: Build and Deploy YARD Documentation
+
+on:
+  workflow_dispatch: # Manual trigger
+  release:
+    types: [published]
+  push:
+    tags:
+      - 'v*' # Trigger on tags like v0.1.0
+
+jobs:
+  build-deploy-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Needed to access tags for versioning
+
+      # 2. Setup Ruby
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.6 # match your gem's Ruby version
+
+      # 3. Install YARD
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+          gem install yard
+
+      # 4. Determine version from tag
+      - name: Set version
+        run: |
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          else
+            # Use latest tag in repo if available, otherwise default to "test"
+            git fetch --tags
+            VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "test")
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      # 5. Generate YARD docs
+      - name: Generate YARD docs
+        run: yard doc
+
+      # 6. Deploy versioned docs
+      - name: Deploy versioned docs
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.ACTIVE_LRS_GH_PAGES_TOKEN }}
+          publish_dir: ./doc
+          destination_dir: ${{ env.VERSION }}
+          keep_files: true
+
+      # 7. Update 'latest' docs
+      - name: Deploy latest docs
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.ACTIVE_LRS_GH_PAGES_TOKEN }}
+          publish_dir: ./doc
+          destination_dir: latest
+          keep_files: true
+
+      # 8. Create/update root redirect to 'latest/'
+      - name: Create root redirect
+        run: |
+          mkdir -p gh-pages-root
+          echo "<!DOCTYPE html><html><head><meta http-equiv='refresh' content='0; url=latest/'></head><body>Redirecting to latest release...</body></html>" > gh-pages-root/index.html
+
+      - name: Deploy root redirect
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.ACTIVE_LRS_GH_PAGES_TOKEN }}
+          publish_dir: ./gh-pages-root
+          keep_files: true
