@@ -26,6 +26,9 @@ module ActiveLrs
     # @return [String] Password for Basic Authentication
     attr_reader :password
 
+    # @return [String] The attribute path for pagination (e.g., "more" or "pagination.more")
+    attr_reader :more_attribute
+
     # @return [Faraday::Connection] The Faraday connection instance
     attr_reader :connection
 
@@ -37,13 +40,15 @@ module ActiveLrs
     # @param url [String] The base URL of the LRS
     # @param username [String] Username for Basic Authentication
     # @param password [String] Password for Basic Authentication
+    # @param more_attribute [String] Attribute path for pagination URL (defaults to "more")
     # @param options [Hash] Optional Faraday connection options
     #
     # @return [void]
-    def initialize(url:, username:, password:, options: {})
+    def initialize(url:, username:, password:, more_attribute: "more", options: {})
       @base_url = url
       @username = username
       @password = password
+      @more_attribute = more_attribute
       @connection = build_connection(options)
     end
 
@@ -87,7 +92,7 @@ module ActiveLrs
 
         statements.concat(response_body.fetch("statements", []))
 
-        more = response_body.fetch("more", false)
+        more = dig_attribute(response_body, more_attribute)
         more = false if more.nil? || more.empty?
       end
 
@@ -95,6 +100,19 @@ module ActiveLrs
     end
 
     private
+
+    # Digs into a hash using a dot-separated attribute path.
+    #
+    # @param hash [Hash] The hash to dig into
+    # @param path [String] Dot-separated attribute path (e.g., "more" or "pagination.more")
+    # @return [Object, nil] The value at the path or nil if not found
+    def dig_attribute(hash, path)
+      path.split(".").reduce(hash) do |current, key|
+        current.is_a?(Hash) ? current[key] : nil
+      end
+    rescue StandardError
+      nil
+    end
 
     # Handles the Faraday response and raises an error if the request failed.
     #
