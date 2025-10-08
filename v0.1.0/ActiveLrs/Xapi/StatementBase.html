@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: ActiveLrs::Xapi::StatementBase
+  
+    &mdash; Documentation by YARD 0.9.37
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "ActiveLrs::Xapi::StatementBase";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../ActiveLrs.html" title="ActiveLrs (module)">ActiveLrs</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+     &raquo; 
+    <span class="title">StatementBase</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: ActiveLrs::Xapi::StatementBase
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveLrs::Xapi::StatementBase</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/active_lrs/xapi/statement_base.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Represents the base structure of an xAPI Statement.</p>
+
+<p>A Statement captures a single experience or action in xAPI. It includes an ‘actor` (who did it), a `verb` (what they did), and an `object` (the target of the action). Optionally, it may include a `result`, `context`, `timestamp`, and `attachments`.</p>
+
+<p>This class can serve as a parent or base class for xAPI Statements.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://opensource.ieee.org/xapi/xapi-base-standard-documentation/-/blob/main/9274.1.1%20xAPI%20Base%20Standard%20for%20LRSs.md#422-statement" target="_parent" title="https://opensource.ieee.org/xapi/xapi-base-standard-documentation/-/blob/main/9274.1.1%20xAPI%20Base%20Standard%20for%20LRSs.md#422-statement">https://opensource.ieee.org/xapi/xapi-base-standard-documentation/-/blob/main/9274.1.1%20xAPI%20Base%20Standard%20for%20LRSs.md#422-statement</a></li>
+    
+  </ul>
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#actor-instance_method" title="#actor (instance method)">#<strong>actor</strong>  &#x21d2; Agent, Group </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The actor performing the action.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attachments-instance_method" title="#attachments (instance method)">#<strong>attachments</strong>  &#x21d2; Array&lt;Attachment&gt;<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Optional attachments associated with the statement.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context-instance_method" title="#context (instance method)">#<strong>context</strong>  &#x21d2; Context<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Optional context providing additional info about the statement.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#object-instance_method" title="#object (instance method)">#<strong>object</strong>  &#x21d2; Activity, ... </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The object of the statement.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#raw_timestamp-instance_method" title="#raw_timestamp (instance method)">#<strong>raw_timestamp</strong>  &#x21d2; String<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The original timestamp string.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#result-instance_method" title="#result (instance method)">#<strong>result</strong>  &#x21d2; Result<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Optional result of the activity.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timestamp-instance_method" title="#timestamp (instance method)">#<strong>timestamp</strong>  &#x21d2; Time<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The timestamp parsed as a Time object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#verb-instance_method" title="#verb (instance method)">#<strong>verb</strong>  &#x21d2; Verb </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The verb representing the action.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(attributes = {})  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Initializes a new StatementBase instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_h-instance_method" title="#to_h (instance method)">#<strong>to_h</strong>  &#x21d2; Hash{String =&gt; Object} </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts the StatementBase into a hash suitable for serialization in an xAPI Statement.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(attributes = {})  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Initializes a new StatementBase instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attributes</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash of statement attributes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <p class="tag_title">Options Hash (<tt>attributes</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">"actor"</span>
+          <span class="type">(<tt>Hash</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>The actor information. Determines if Agent or Group.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">"verb"</span>
+          <span class="type">(<tt>Hash</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>Verb information.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">"object"</span>
+          <span class="type">(<tt>Hash</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>Object information (Activity, Agent, Group, StatementRef, SubStatement).</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">"result"</span>
+          <span class="type">(<tt>Hash</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>Result object.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">"context"</span>
+          <span class="type">(<tt>Hash</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>Context object.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">"timestamp"</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>ISO 8601 timestamp string.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">"attachments"</span>
+          <span class="type">(<tt>Array&lt;Hash&gt;</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>Array of attachments.</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi/statement_base.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_actor'>actor</span> <span class='op'>=</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>actor</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>member</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>?</span> <span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Group.html" title="ActiveLrs::Xapi::Group (class)">Group</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Group.html#initialize-instance_method" title="ActiveLrs::Xapi::Group#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>actor</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Agent.html" title="ActiveLrs::Xapi::Agent (class)">Agent</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Agent.html#initialize-instance_method" title="ActiveLrs::Xapi::Agent#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>actor</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>actor</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_verb'>verb</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Verb.html" title="ActiveLrs::Xapi::Verb (class)">Verb</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Verb.html#initialize-instance_method" title="ActiveLrs::Xapi::Verb#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>verb</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>verb</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_object_node'>object_node</span> <span class='op'>=</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>object</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_object'>object</span> <span class='op'>=</span> <span class='kw'>case</span> <span class='id identifier rubyid_object_node'>object_node</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>objectType</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Group</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Agent</span><span class='tstring_end'>&quot;</span></span>
+      <span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Agent.html" title="ActiveLrs::Xapi::Agent (class)">Agent</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Agent.html#initialize-instance_method" title="ActiveLrs::Xapi::Agent#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_object_node'>object_node</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>StatementRef</span><span class='tstring_end'>&quot;</span></span>
+      <span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StatementRef.html" title="ActiveLrs::Xapi::StatementRef (class)">StatementRef</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="StatementRef.html#initialize-instance_method" title="ActiveLrs::Xapi::StatementRef#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_object_node'>object_node</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SubStatement</span><span class='tstring_end'>&quot;</span></span>
+      <span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="SubStatement.html" title="ActiveLrs::Xapi::SubStatement (class)">SubStatement</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="SubStatement.html#initialize-instance_method" title="ActiveLrs::Xapi::SubStatement#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_object_node'>object_node</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Activity.html" title="ActiveLrs::Xapi::Activity (class)">Activity</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Activity.html#initialize-instance_method" title="ActiveLrs::Xapi::Activity#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_object_node'>object_node</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Result.html" title="ActiveLrs::Xapi::Result (class)">Result</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Result.html#initialize-instance_method" title="ActiveLrs::Xapi::Result#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>result</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>result</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_context'>context</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Context.html" title="ActiveLrs::Xapi::Context (class)">Context</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Context.html#initialize-instance_method" title="ActiveLrs::Xapi::Context#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>context</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>context</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>timestamp</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>timestamp</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_raw_timestamp'>raw_timestamp</span> <span class='op'>=</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>timestamp</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>timestamp</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_attachments'>attachments</span> <span class='op'>=</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>attachments</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='op'>&amp;.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_attachment'>attachment</span><span class='op'>|</span> <span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Attachment.html" title="ActiveLrs::Xapi::Attachment (class)">Attachment</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Attachment.html#initialize-instance_method" title="ActiveLrs::Xapi::Attachment#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_attachment'>attachment</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>attachments</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="actor=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="actor-instance_method">
+  
+    #<strong>actor</strong>  &#x21d2; <tt><span class='object_link'><a href="Agent.html" title="ActiveLrs::Xapi::Agent (class)">Agent</a></span></tt>, <tt><span class='object_link'><a href="Group.html" title="ActiveLrs::Xapi::Group (class)">Group</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The actor performing the action.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Agent.html" title="ActiveLrs::Xapi::Agent (class)">Agent</a></span></tt>, <tt><span class='object_link'><a href="Group.html" title="ActiveLrs::Xapi::Group (class)">Group</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The actor performing the action.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi/statement_base.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_actor'>actor</span>
+  <span class='ivar'>@actor</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="attachments=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="attachments-instance_method">
+  
+    #<strong>attachments</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Attachment.html" title="ActiveLrs::Xapi::Attachment (class)">Attachment</a></span>&gt;</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Optional attachments associated with the statement.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Attachment.html" title="ActiveLrs::Xapi::Attachment (class)">Attachment</a></span>&gt;</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional attachments associated with the statement.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi/statement_base.rb', line 37</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_attachments'>attachments</span>
+  <span class='ivar'>@attachments</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="context=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="context-instance_method">
+  
+    #<strong>context</strong>  &#x21d2; <tt><span class='object_link'><a href="Context.html" title="ActiveLrs::Xapi::Context (class)">Context</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Optional context providing additional info about the statement.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Context.html" title="ActiveLrs::Xapi::Context (class)">Context</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional context providing additional info about the statement.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi/statement_base.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_context'>context</span>
+  <span class='ivar'>@context</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="object=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="object-instance_method">
+  
+    #<strong>object</strong>  &#x21d2; <tt><span class='object_link'><a href="Activity.html" title="ActiveLrs::Xapi::Activity (class)">Activity</a></span></tt>, ... 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The object of the statement.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Activity.html" title="ActiveLrs::Xapi::Activity (class)">Activity</a></span></tt>, <tt><span class='object_link'><a href="Agent.html" title="ActiveLrs::Xapi::Agent (class)">Agent</a></span></tt>, <tt><span class='object_link'><a href="Group.html" title="ActiveLrs::Xapi::Group (class)">Group</a></span></tt>, <tt><span class='object_link'><a href="StatementRef.html" title="ActiveLrs::Xapi::StatementRef (class)">StatementRef</a></span></tt>, <tt><span class='object_link'><a href="SubStatement.html" title="ActiveLrs::Xapi::SubStatement (class)">SubStatement</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The object of the statement.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi/statement_base.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_object'>object</span>
+  <span class='ivar'>@object</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="raw_timestamp=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="raw_timestamp-instance_method">
+  
+    #<strong>raw_timestamp</strong>  &#x21d2; <tt>String</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The original timestamp string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The original timestamp string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi/statement_base.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_raw_timestamp'>raw_timestamp</span>
+  <span class='ivar'>@raw_timestamp</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="result=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="result-instance_method">
+  
+    #<strong>result</strong>  &#x21d2; <tt><span class='object_link'><a href="Result.html" title="ActiveLrs::Xapi::Result (class)">Result</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Optional result of the activity.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Result.html" title="ActiveLrs::Xapi::Result (class)">Result</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional result of the activity.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi/statement_base.rb', line 25</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span>
+  <span class='ivar'>@result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="timestamp=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="timestamp-instance_method">
+  
+    #<strong>timestamp</strong>  &#x21d2; <tt>Time</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The timestamp parsed as a Time object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The timestamp parsed as a Time object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi/statement_base.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_timestamp'>timestamp</span>
+  <span class='ivar'>@timestamp</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="verb=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="verb-instance_method">
+  
+    #<strong>verb</strong>  &#x21d2; <tt><span class='object_link'><a href="Verb.html" title="ActiveLrs::Xapi::Verb (class)">Verb</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The verb representing the action.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Verb.html" title="ActiveLrs::Xapi::Verb (class)">Verb</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The verb representing the action.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi/statement_base.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_verb'>verb</span>
+  <span class='ivar'>@verb</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="to_h-instance_method">
+  
+    #<strong>to_h</strong>  &#x21d2; <tt>Hash{String =&gt; Object}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts the StatementBase into a hash suitable for serialization in an xAPI Statement.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_statement'>statement</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../ActiveLrs.html" title="ActiveLrs (module)">ActiveLrs</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Xapi.html" title="ActiveLrs::Xapi (module)">Xapi</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi::StatementBase (class)">StatementBase</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="ActiveLrs::Xapi::StatementBase#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>actor</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mbox</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mailto:alice@example.com</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>verb</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://adlnet.gov/expapi/verbs/completed</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>object</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.com/course/1</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>timestamp</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>2025-09-19T10:00:00Z</span><span class='tstring_end'>&quot;</span></span>
+<span class='rparen'>)</span>
+<span class='id identifier rubyid_statement'>statement</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
+<span class='comment'># =&gt; {
+</span><span class='comment'>#   &quot;actor&quot; =&gt; { &quot;objectType&quot; =&gt; &quot;Agent&quot;, &quot;mbox&quot; =&gt; &quot;mailto:alice@example.com&quot; },
+</span><span class='comment'>#   &quot;verb&quot; =&gt; { &quot;id&quot; =&gt; &quot;http://adlnet.gov/expapi/verbs/completed&quot; },
+</span><span class='comment'>#   &quot;object&quot; =&gt; { &quot;id&quot; =&gt; &quot;http://example.com/course/1&quot;, &quot;objectType&quot; =&gt; &quot;Activity&quot; },
+</span><span class='comment'>#   &quot;timestamp&quot; =&gt; &quot;2025-09-19T10:00:00Z&quot;
+</span><span class='comment'># }</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; Object}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash representation of the statement, including only present attributes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi/statement_base.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
+  <span class='id identifier rubyid_node'>node</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_node'>node</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>actor</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_actor'>actor</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
+  <span class='id identifier rubyid_node'>node</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>verb</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_verb'>verb</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
+  <span class='id identifier rubyid_node'>node</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>object</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_object'>object</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
+  <span class='id identifier rubyid_node'>node</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>result</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span> <span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span>
+  <span class='id identifier rubyid_node'>node</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>context</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_context'>context</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span> <span class='kw'>if</span> <span class='id identifier rubyid_context'>context</span>
+  <span class='id identifier rubyid_node'>node</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>timestamp</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_raw_timestamp'>raw_timestamp</span> <span class='op'>||</span> <span class='id identifier rubyid_timestamp'>timestamp</span><span class='period'>.</span><span class='id identifier rubyid_strftime'>strftime</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%FT%T%:z</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_timestamp'>timestamp</span>
+  <span class='id identifier rubyid_node'>node</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>attachments</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_attachments'>attachments</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span> <span class='id identifier rubyid_element'>element</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_attachments'>attachments</span><span class='op'>&amp;.</span><span class='id identifier rubyid_any?'>any?</span>
+  <span class='id identifier rubyid_node'>node</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Wed Oct  8 23:16:54 2025 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.37 (ruby-3.3.6).
+</div>
+
+    </div>
+  </body>
+</html>

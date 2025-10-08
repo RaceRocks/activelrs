@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.37
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<h1 id="label-ActiveLRS">ActiveLRS</h1>
+
+<p>ActiveLRS is a lightweight Rails gem for working with <a href="https://experienceapi.com">xAPI (Experience API)</a> data stored in a Learning Record Store (LRS).</p>
+
+<p>It can generate plain Rails model classes (independent of ActiveRecord) and matching RSpec test files directly from an <strong>xAPI profile</strong>. An xAPI profile defines the vocabulary and structure for specific learning or activity events.</p>
+
+<p>With ActiveLRS, you can:<br> - Generate Rails model classes from an xAPI profile.<br> - Automatically create test files for those classes.<br> - Fetch and process xAPI statements that match the events defined in your profile.</p>
+
+<p>This makes it easier to prototype, test, and integrate xAPI-based learning data into your Ruby on Rails applications.</p>
+
+<h2 id="label-Installation">Installation</h2>
+<ol><li>
+<p>Add <code>active_lrs</code> to your Rails application's <code>Gemfile</code></p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>git:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://github.com/RaceRocks/activelrs</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>This will install the most recent version of the gem to your rails app.</p>
+
+<p>For a specific branch of the gem use</p>
+
+<pre class="code ruby"><code class="ruby">gem &quot;active_lrs&quot;, git: &quot;https://github.com/RaceRocks/activelrs&quot; branch: &lt;the branch name&gt;
+</code></pre>
+</li><li>
+<p>Save your <code>Gemfile</code> and run:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
+</code></pre>
+
+<p>or</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_update'>update</span>
+</code></pre>
+</li><li>
+<p>To install active_lrs, run the rails generator from your rails app directory:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_rails'>rails</span> <span class='id identifier rubyid_generate'>generate</span> <span class='label'>active_lrs:</span><span class='id identifier rubyid_install'>install</span>
+</code></pre>
+</li><li>
+<p>Open <code>config/remote_lrs.yml</code> and enter the connection details for your Learning Record Store (LRS).</p>
+
+<p>An LRS is a system that stores learning activity data (xAPI statements). If you don’t have an LRS yet, you can use the ADL xAPI Sandbox, which is a free public LRS for testing:</p>
+<ul><li>
+<p><strong>Endpoint:</strong> <code>https://lrs.adlnet.gov/xapi/</code></p>
+</li><li>
+<p><strong>Username / Password:</strong> Sign up for a free account on the ADL website.</p>
+</li></ul>
+
+<p>This allows you to start experimenting with ActiveLRS immediately without setting up your own LRS.</p>
+</li></ol>
+
+<h2 id="label-Configuration">Configuration</h2>
+
+<p>You can configure <code>ActiveLRS</code> in a Rails initializer to customize settings for your app:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># config/initializers/active_lrs.rb
+</span><span class='const'><span class='object_link'><a href="ActiveLrs.html" title="ActiveLrs (module)">ActiveLrs</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'><span class='object_link'><a href="ActiveLrs.html#configure-class_method" title="ActiveLrs.configure (method)">configure</a></span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='comment'># Set the default locale for xAPI statements
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_default_locale'>default_locale</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fr-FR</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'># Set the URL of your xAPI Profile server
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_xapi_profile_server_url'>xapi_profile_server_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://my-profiles.example.com/</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>Defaults are used if not overridden:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'><span class='object_link'><a href="ActiveLrs.html" title="ActiveLrs (module)">ActiveLrs</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configuration'><span class='object_link'><a href="ActiveLrs.html#configuration-class_method" title="ActiveLrs.configuration (method)">configuration</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default_locale'><span class='object_link'><a href="ActiveLrs/Configuration.html#default_locale-instance_method" title="ActiveLrs::Configuration#default_locale (method)">default_locale</a></span></span>        <span class='comment'># =&gt; &quot;en-US&quot;
+</span><span class='const'><span class='object_link'><a href="ActiveLrs.html" title="ActiveLrs (module)">ActiveLrs</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configuration'><span class='object_link'><a href="ActiveLrs.html#configuration-class_method" title="ActiveLrs.configuration (method)">configuration</a></span></span><span class='period'>.</span><span class='id identifier rubyid_xapi_profile_server_url'><span class='object_link'><a href="ActiveLrs/Configuration.html#xapi_profile_server_url-instance_method" title="ActiveLrs::Configuration#xapi_profile_server_url (method)">xapi_profile_server_url</a></span></span> <span class='comment'># =&gt; &quot;https://profiles.adlnet.gov/&quot;
+</span></code></pre>
+
+<h2 id="label-Generators">Generators</h2>
+
+<pre class="code ruby"><code class="ruby">rails generate active_lrs:statement &lt;xAPI_Profile_IRI&gt;
+</code></pre>
+
+<p>This generator will fetch an xAPI profile from the <a href="https://profiles.adlnet.gov/api-info/get/by-iri">xAPI profile server API</a>, and create a model within your application (<code>/app/models/&lt;profile_name&gt;_statement.rb</code>). Generated models contain helpers to make querying statements easier.</p>
+
+<blockquote>
+<p>[!TIP] You can find xAPI profiles and their IRIs <a href="https://profiles.adlnet.gov/profiles">here</a>.</p>
+</blockquote>
+
+<h2 id="label-Documentation">Documentation</h2>
+
+<p>For a full list of available functionality, usage details, and examples, please check out the <a href="https://racerocks.github.io/activelrs">documentation</a>.<br> This is the best place to explore all classes, modules, and methods provided by the library.</p>
+
+<h2 id="label-Development">Development</h2>
+
+<h3 id="label-1.+Clone+the+repository">1. Clone the repository</h3>
+
+<pre class="code ruby"><code class="ruby">git clone https://github.com/RaceRocks/activelrs
+</code></pre>
+
+<h3 id="label-2.+Install+Dependencies+and+Build+Gem">2. Install Dependencies and Build Gem</h3>
+
+<p>Navigate to gem directory</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_cd'>cd</span> <span class='id identifier rubyid_active_lrs'>active_lrs</span>
+</code></pre>
+
+<p>Install dependencies</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
+</code></pre>
+
+<p>Build gem</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_build'>build</span> <span class='id identifier rubyid_active_lrs'>active_lrs</span><span class='period'>.</span><span class='id identifier rubyid_gemspec'>gemspec</span>
+</code></pre>
+
+<h2 id="label-Testing+and+Quality+Assurance">Testing and Quality Assurance</h2>
+
+<h3 id="label-Testing+-+RSpec">Testing - RSpec</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Run entire RSpec test suite:
+</span><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rspec'>rspec</span>
+
+<span class='comment'># Run specific RSpec test files: 
+</span><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rspec'>rspec</span> <span class='id identifier rubyid_spec'>spec</span><span class='op'>/</span><span class='id identifier rubyid_path'>path</span><span class='op'>/</span><span class='id identifier rubyid_to'>to</span><span class='op'>/</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_rb'>rb</span>
+</code></pre>
+
+<h3 id="label-Quality+Assurance+-+Rubocop">Quality Assurance - Rubocop</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># To check entire codebase for violations:
+</span><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rubocop'>rubocop</span>
+
+<span class='comment'># To check specific files:  
+</span><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rubocop'>rubocop</span> <span class='id identifier rubyid_path'>path</span><span class='op'>/</span><span class='id identifier rubyid_to'>to</span><span class='op'>/</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_rb'>rb</span> 
+
+<span class='comment'># Use the -A flag to auto-correct violations:
+</span><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rubocop'>rubocop</span> <span class='op'>-</span><span class='const'>A</span>
+</code></pre>
+
+<h2 id="label-Core+Maintainers+and+Authors">Core Maintainers and Authors</h2>
+
+<p>This project is actively maintained by the <strong>Racerocks Core Engineering Team</strong>, a specialized group dedicated to building <strong>robust, next-generation training software</strong>.</p>
+
+<p>These are the <strong>trusted architects and developers</strong> who collaboratively drive the vision, manage the repository, and ensure the quality and stability of <code>activelrs</code>. They represent our unified expertise in modern learning data systems.</p>
+
+<table role="table">
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Role / Focus Area</th>
+<th align="left">GitHub Profile</th>
+<th align="left">Company Title</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><strong>Amie Walton</strong></td>
+<td align="left">Architect &amp; Standards Lead (TLA/IEEE)</td>
+<td align="left"><a href="https://github.com/AmieAtRR">@AmieAtRR</a></td>
+<td align="left">VP of Technology</td>
+</tr>
+<tr>
+<td align="left"><strong>Justin Granofsky</strong></td>
+<td align="left">Core Maintainer / Contributor</td>
+<td align="left"><a href="https://github.com/justinGranof">@justinGranof</a></td>
+<td align="left">Full Stack Developer</td>
+</tr>
+<tr>
+<td align="left"><strong>Ira Susanto</strong></td>
+<td align="left">Core Maintainer / Contributor</td>
+<td align="left"><a href="https://github.com/ira-susanto">@ira-susanto</a></td>
+<td align="left">Full Stack Developer</td>
+</tr>
+<tr>
+<td align="left"><strong>Sam Foran</strong></td>
+<td align="left">Core Maintainer / Contributor</td>
+<td align="left"><a href="https://github.com/s-foran">@s-foran</a></td>
+<td align="left">Full Stack Developer</td>
+</tr>
+</tbody>
+</table>
+<hr>
+
+<h2 id="label-Community+Contributors">Community Contributors</h2>
+
+<p>We deeply appreciate contributions from the wider open-source community, which help this project grow stronger and more versatile.</p>
+<ul><li>
+<p><a href="https://github.com/amielouwho">@amielouwho</a> | <img src="https://img.shields.io/badge/-Hacktoberfest%202025-ff69b4" alt="Hacktoberfest"> <img src="https://img.shields.io/badge/%20open%20source-green" alt="Open"> Source |</p>
+</li></ul>
+
+<blockquote>
+<p>Outside contributions — code, documentation, bug fixes, ideas — are always welcome. See <a href="./CONTRIBUTING_md.html">CONTRIBUTING.md</a> for how to get involved.</p>
+</blockquote>
+
+<h2 id="label-Attribution">Attribution</h2>
+
+<p>This project includes code derived from <a href="https://github.com/Deakin-Prime/Xapi">Xapi</a>, licensed under MIT. We have modified it for our use case.</p>
+
+<h2 id="label-License">License</h2>
+
+<p>The MIT License (MIT).</p>
+
+<p>© 2025 RaceRocks 3D. See <a href="LICENSE.txt">LICENSE</a> for details.</p>
+</div></div>
+
+      <div id="footer">
+  Generated on Wed Oct  8 23:16:53 2025 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.37 (ruby-3.3.6).
+</div>
+
+    </div>
+  </body>
+</html>
