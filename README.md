@@ -129,11 +129,11 @@ bundle exec rubocop path/to/file.rb
 # Use the -A flag to auto-correct violations:
 bundle exec rubocop -A
 ```
-# 👑 Project Leadership and Core Development Team
+## Project Leadership and Core Development Team
 
 This project, **activelrs**, is actively developed and maintained by the **Racerocks Core Engineering Team**. We are a specialized group dedicated to building robust, cutting-edge software that powers the next generation of integrated, high-impact training.
 
-## 🏢 About Racerocks
+## About Racerocks
 
 **Racerocks** is committed to **"Empowering through limitless learning."** Our organization is trusted by defense and security leaders to strengthen national readiness and allied collaboration through innovation.
 
@@ -155,26 +155,28 @@ By sharing `activelrs`, we solidify our commitment to open standards and transpa
 
 ---
 
-## 🛠️ Core Maintainers and Authors
+## Core Maintainers and Authors
 
 These are the **trusted architects and developers** who collaboratively drive the vision, manage the repository, and ensure the quality and stability of `activelrs`. They represent our unified expertise in modern learning data systems.
 
 | Name | Role / Focus Area | GitHub Profile | Company Title |
 | :--- | :--- | :--- | :--- |
-| **AmieAtRR** | **Architect & Standards Lead** (TLA/IEEE) | [@AmieAtRR](https://github.com/AmieAtRR) | VP of Technology |
+| **Amie Walton** | Architect & Standards Lead (TLA/IEEE) | [@AmieAtRR](https://github.com/AmieAtRR) | VP of Technology |
 | **Justin Granofsky** | Core Maintainer / Contributor | [@justinGranof](https://github.com/justinGranof) | Full Stack Developer |
 | **Ira Susanto** | Core Maintainer / Contributor | [@ira-susanto](https://github.com/ira-susanto) | Full Stack Developer |
 | **Sam Foran** | Core Maintainer / Contributor  | [@s-foran](https://github.com/s-foran) | Full Stack Developer |
 
 ---
 
-## 🌟 Community Contributors
 
-We recognize and appreciate all external contributions that make this project better. Thank you for your support!
+## Community Contributors
 
-* [@amielouwho](https://github.com/amielouwho)
+We deeply appreciate contributions from the wider open-source community, which help this project grow stronger and more versatile.
 
-***
+* [@amielouwho](https://github.com/amielouwho) | ![Hacktoberfest](https://img.shields.io/badge/-Hacktoberfest%202025-ff69b4) ![Open Source](https://img.shields.io/badge/-Open-Source-green) |
+
+> Outside contributions — code, documentation, bug fixes, ideas — are always welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to get involved.
+
 
 ## Attribution
 
