@@ -129,19 +129,10 @@ bundle exec rubocop path/to/file.rb
 # Use the -A flag to auto-correct violations:
 bundle exec rubocop -A
 ```
-##  Racerocks: Standards-Driven Development
-
-This project is actively maintained by the **Racerocks Core Engineering Team**, a specialized group dedicated to building **robust, next-generation training software**.
-
-* **Standards Leadership:** Our team holds a leadership role as a **Technical Editor** on the **TLA Study Group** (IEEE/LTSC), ensuring `activelrs` is developed with a deep, standards-driven understanding of distributed learning.
-* **Mission:** **Racerocks** is committed to "Empowering through limitless learning" and is trusted by defense and security leaders to strengthen national readiness through innovation.
-
-* **Learn more:** [https://www.racerocks3d.ca](https://www.racerocks3d.com)
-
-
----
 
 ## Core Maintainers and Authors
+
+This project is actively maintained by the **Racerocks Core Engineering Team**, a specialized group dedicated to building **robust, next-generation training software**.
 
 These are the **trusted architects and developers** who collaboratively drive the vision, manage the repository, and ensure the quality and stability of `activelrs`. They represent our unified expertise in modern learning data systems.
 
