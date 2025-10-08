@@ -17,14 +17,23 @@ This makes it easier to prototype, test, and integrate xAPI-based learning data 
     ```ruby
     gem "active_lrs", git: "https://github.com/RaceRocks/activelrs"
     ```
-    (Default behavior will use the main branch for building the gem, you can specify the branch you want by appending `branch: 'branch-name'` to the line above.)
+    This will install the most recent version of the gem to your rails app.  
+    
+    For a specific branch of the gem use 
+    ```ruby
+    gem "active_lrs", git: "https://github.com/RaceRocks/activelrs" branch: <the branch name>
+    ```
 
-2. Then from your project directory, run:
+2. Save your `Gemfile` and run:
     ```bash
     bundle install
     ```
+    or
+    ```bash
+    bundle update
+    ```
 
-3. Next, you need to run the generator:
+3. To install active_lrs, run the rails generator from your rails app directory:
     ```bash
     rails generate active_lrs:install
     ```
@@ -120,6 +129,52 @@ bundle exec rubocop path/to/file.rb
 # Use the -A flag to auto-correct violations:
 bundle exec rubocop -A
 ```
+# 👑 Project Leadership and Core Development Team
+
+This project, **activelrs**, is actively developed and maintained by the **Racerocks Core Engineering Team**. We are a specialized group dedicated to building robust, cutting-edge software that powers the next generation of integrated, high-impact training.
+
+## 🏢 About Racerocks
+
+**Racerocks** is committed to **"Empowering through limitless learning."** Our organization is trusted by defense and security leaders to strengthen national readiness and allied collaboration through innovation.
+
+### Our Leadership in Learning Standards
+
+The genesis of **activelrs** stems from our direct engagement with the future of learning standards. Our team holds a leadership role as a **Technical Editor** on the **Total Learning Architecture (TLA) Study Group**, sponsored by the **IEEE Learning Technology Standards Committee (LTSC)**.
+
+This unique position ensures `activelrs` is developed from a deep, standards-driven understanding of distributed learning.
+
+**We are recognized specialists in:**
+
+* **Learning Standards:** Translating **TLA, IEEE, and LTSC** requirements into practical, deployable software.
+* **Data Integration:** Building ORM utilities that expertly map **xAPI profiles** to seamlessly manage LRS data, future-proofing training architectures beyond legacy SCORM/LMS systems.
+
+By sharing `activelrs`, we solidify our commitment to open standards and transparent development.
+
+* **Company Website:** [https://www.racerocks3d.ca](https://www.racerocks3d.com)
+* **Open Source Portfolio:** [https://github.com/RaceRocks](https://github.com/RaceRocks)
+
+---
+
+## 🛠️ Core Maintainers and Authors
+
+These are the **trusted architects and developers** who collaboratively drive the vision, manage the repository, and ensure the quality and stability of `activelrs`. They represent our unified expertise in modern learning data systems.
+
+| Name | Role / Focus Area | GitHub Profile | Company Title |
+| :--- | :--- | :--- | :--- |
+| **AmieAtRR** | **Architect & Standards Lead** (TLA/IEEE) | [@AmieAtRR](https://github.com/AmieAtRR) | VP of Technology |
+| **Justin Granofsky** | Core Maintainer / Contributor | [@justinGranof](https://github.com/justinGranof) | Full Stack Developer |
+| **Ira Susanto** | Core Maintainer / Contributor | [@ira-susanto](https://github.com/ira-susanto) | Full Stack Developer |
+| **Sam Foran** | Core Maintainer / Contributor  | [@s-foran](https://github.com/s-foran) | Full Stack Developer |
+
+---
+
+## 🌟 Community Contributors
+
+We recognize and appreciate all external contributions that make this project better. Thank you for your support!
+
+* [@amielouwho](https://github.com/amielouwho)
+
+***
 
 ## Attribution
 
