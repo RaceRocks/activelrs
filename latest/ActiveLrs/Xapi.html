@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: ActiveLrs::Xapi
+  
+    &mdash; Documentation by YARD 0.9.37
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "ActiveLrs::Xapi";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (X)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../ActiveLrs.html" title="ActiveLrs (module)">ActiveLrs</a></span></span>
+     &raquo; 
+    <span class="title">Xapi</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: ActiveLrs::Xapi
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/active_lrs/xapi.rb<span class="defines">,<br />
+  lib/active_lrs/xapi/verb.rb,<br /> lib/active_lrs/xapi/agent.rb,<br /> lib/active_lrs/xapi/group.rb,<br /> lib/active_lrs/xapi/score.rb,<br /> lib/active_lrs/xapi/result.rb,<br /> lib/active_lrs/xapi/context.rb,<br /> lib/active_lrs/xapi/activity.rb,<br /> lib/active_lrs/xapi/statement.rb,<br /> lib/active_lrs/xapi/attachment.rb,<br /> lib/active_lrs/xapi/agent_account.rb,<br /> lib/active_lrs/xapi/statement_ref.rb,<br /> lib/active_lrs/xapi/sub_statement.rb,<br /> lib/active_lrs/xapi/statement_base.rb,<br /> lib/active_lrs/xapi/context_activities.rb,<br /> lib/active_lrs/xapi/activity_definition.rb,<br /> lib/active_lrs/xapi/interaction_component.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Namespace for xAPI-related models and classes.</p>
+
+<p>This module contains all the core classes for representing xAPI statements, actors, activities, results, context, and related components.</p>
+
+<p>All classes are autoloaded to reduce memory usage and improve load time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Xapi/Activity.html" title="ActiveLrs::Xapi::Activity (class)">Activity</a></span>, <span class='object_link'><a href="Xapi/ActivityDefinition.html" title="ActiveLrs::Xapi::ActivityDefinition (class)">ActivityDefinition</a></span>, <span class='object_link'><a href="Xapi/Agent.html" title="ActiveLrs::Xapi::Agent (class)">Agent</a></span>, <span class='object_link'><a href="Xapi/AgentAccount.html" title="ActiveLrs::Xapi::AgentAccount (class)">AgentAccount</a></span>, <span class='object_link'><a href="Xapi/Attachment.html" title="ActiveLrs::Xapi::Attachment (class)">Attachment</a></span>, <span class='object_link'><a href="Xapi/Context.html" title="ActiveLrs::Xapi::Context (class)">Context</a></span>, <span class='object_link'><a href="Xapi/ContextActivities.html" title="ActiveLrs::Xapi::ContextActivities (class)">ContextActivities</a></span>, <span class='object_link'><a href="Xapi/Group.html" title="ActiveLrs::Xapi::Group (class)">Group</a></span>, <span class='object_link'><a href="Xapi/InteractionComponent.html" title="ActiveLrs::Xapi::InteractionComponent (class)">InteractionComponent</a></span>, <span class='object_link'><a href="Xapi/Result.html" title="ActiveLrs::Xapi::Result (class)">Result</a></span>, <span class='object_link'><a href="Xapi/Score.html" title="ActiveLrs::Xapi::Score (class)">Score</a></span>, <span class='object_link'><a href="Xapi/Statement.html" title="ActiveLrs::Xapi::Statement (class)">Statement</a></span>, <span class='object_link'><a href="Xapi/StatementBase.html" title="ActiveLrs::Xapi::StatementBase (class)">StatementBase</a></span>, <span class='object_link'><a href="Xapi/StatementRef.html" title="ActiveLrs::Xapi::StatementRef (class)">StatementRef</a></span>, <span class='object_link'><a href="Xapi/SubStatement.html" title="ActiveLrs::Xapi::SubStatement (class)">SubStatement</a></span>, <span class='object_link'><a href="Xapi/Verb.html" title="ActiveLrs::Xapi::Verb (class)">Verb</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Activity-instance_method" title="#Activity (instance method)">#<strong>Activity</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI Activity object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ActivityDefinition-instance_method" title="#ActivityDefinition (instance method)">#<strong>ActivityDefinition</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI ActivityDefinition object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Agent-instance_method" title="#Agent (instance method)">#<strong>Agent</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI Agent object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#AgentAccount-instance_method" title="#AgentAccount (instance method)">#<strong>AgentAccount</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI AgentAccount object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Attachment-instance_method" title="#Attachment (instance method)">#<strong>Attachment</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI Attachment object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Context-instance_method" title="#Context (instance method)">#<strong>Context</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI Context object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ContextActivities-instance_method" title="#ContextActivities (instance method)">#<strong>ContextActivities</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI ContextActivities object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Group-instance_method" title="#Group (instance method)">#<strong>Group</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI Group object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#InteractionComponent-instance_method" title="#InteractionComponent (instance method)">#<strong>InteractionComponent</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI InteractionComponent object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Result-instance_method" title="#Result (instance method)">#<strong>Result</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI Result object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Score-instance_method" title="#Score (instance method)">#<strong>Score</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI Score object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Statement-instance_method" title="#Statement (instance method)">#<strong>Statement</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI Statement object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#StatementBase-instance_method" title="#StatementBase (instance method)">#<strong>StatementBase</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Base class for xAPI statements.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#StatementRef-instance_method" title="#StatementRef (instance method)">#<strong>StatementRef</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI StatementRef object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#SubStatement-instance_method" title="#SubStatement (instance method)">#<strong>SubStatement</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI SubStatement object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#Verb-instance_method" title="#Verb (instance method)">#<strong>Verb</strong>  &#x21d2; Class </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XAPI Verb object.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="Activity-instance_method">
+  
+    #<strong>Activity</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI Activity object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI Activity object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ActivityDefinition-instance_method">
+  
+    #<strong>ActivityDefinition</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI ActivityDefinition object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI ActivityDefinition object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Agent-instance_method">
+  
+    #<strong>Agent</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI Agent object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI Agent object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="AgentAccount-instance_method">
+  
+    #<strong>AgentAccount</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI AgentAccount object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI AgentAccount object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Attachment-instance_method">
+  
+    #<strong>Attachment</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI Attachment object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI Attachment object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Context-instance_method">
+  
+    #<strong>Context</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI Context object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI Context object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ContextActivities-instance_method">
+  
+    #<strong>ContextActivities</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI ContextActivities object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI ContextActivities object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Group-instance_method">
+  
+    #<strong>Group</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI Group object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI Group object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="InteractionComponent-instance_method">
+  
+    #<strong>InteractionComponent</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI InteractionComponent object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI InteractionComponent object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Result-instance_method">
+  
+    #<strong>Result</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI Result object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI Result object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Score-instance_method">
+  
+    #<strong>Score</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI Score object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI Score object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Statement-instance_method">
+  
+    #<strong>Statement</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI Statement object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI Statement object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="StatementBase-instance_method">
+  
+    #<strong>StatementBase</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Base class for xAPI statements.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Base class for xAPI statements</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="StatementRef-instance_method">
+  
+    #<strong>StatementRef</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI StatementRef object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI StatementRef object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="SubStatement-instance_method">
+  
+    #<strong>SubStatement</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI SubStatement object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI SubStatement object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="Verb-instance_method">
+  
+    #<strong>Verb</strong>  &#x21d2; <tt>Class</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns xAPI Verb object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>xAPI Verb object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/active_lrs/xapi.rb', line 44</span>
+
+<span class='kw'>module</span> <span class='const'><span class='object_link'><a href="" title="ActiveLrs::Xapi (module)">Xapi</a></span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Activity</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ActivityDefinition</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/activity_definition</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Agent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:AgentAccount</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/agent_account</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Attachment</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/attachment</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Context</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:ContextActivities</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/context_activities</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Group</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/group</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:InteractionComponent</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/interaction_component</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/result</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Score</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/score</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementBase</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_base</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:StatementRef</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement_ref</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Statement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:SubStatement</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/sub_statement</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_autoload'>autoload</span> <span class='symbol'>:Verb</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active_lrs/xapi/verb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+      <div id="footer">
+  Generated on Wed Oct  8 23:16:53 2025 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.37 (ruby-3.3.6).
+</div>
+
+    </div>
+  </body>
+</html>
