@@ -129,29 +129,15 @@ bundle exec rubocop path/to/file.rb
 # Use the -A flag to auto-correct violations:
 bundle exec rubocop -A
 ```
-## Project Leadership and Core Development Team
+##  Racerocks: Standards-Driven Development
 
-This project, **activelrs**, is actively developed and maintained by the **Racerocks Core Engineering Team**. We are a specialized group dedicated to building robust, cutting-edge software that powers the next generation of integrated, high-impact training.
+This project is actively maintained by the **Racerocks Core Engineering Team**, a specialized group dedicated to building **robust, next-generation training software**.
 
-## About Racerocks
+* **Standards Leadership:** Our team holds a leadership role as a **Technical Editor** on the **TLA Study Group** (IEEE/LTSC), ensuring `activelrs` is developed with a deep, standards-driven understanding of distributed learning.
+* **Mission:** **Racerocks** is committed to "Empowering through limitless learning" and is trusted by defense and security leaders to strengthen national readiness through innovation.
 
-**Racerocks** is committed to **"Empowering through limitless learning."** Our organization is trusted by defense and security leaders to strengthen national readiness and allied collaboration through innovation.
+* **Learn more:** [https://www.racerocks3d.ca](https://www.racerocks3d.com)
 
-### Our Leadership in Learning Standards
-
-The genesis of **activelrs** stems from our direct engagement with the future of learning standards. Our team holds a leadership role as a **Technical Editor** on the **Total Learning Architecture (TLA) Study Group**, sponsored by the **IEEE Learning Technology Standards Committee (LTSC)**.
-
-This unique position ensures `activelrs` is developed from a deep, standards-driven understanding of distributed learning.
-
-**We are recognized specialists in:**
-
-* **Learning Standards:** Translating **TLA, IEEE, and LTSC** requirements into practical, deployable software.
-* **Data Integration:** Building ORM utilities that expertly map **xAPI profiles** to seamlessly manage LRS data, future-proofing training architectures beyond legacy SCORM/LMS systems.
-
-By sharing `activelrs`, we solidify our commitment to open standards and transparent development.
-
-* **Company Website:** [https://www.racerocks3d.ca](https://www.racerocks3d.com)
-* **Open Source Portfolio:** [https://github.com/RaceRocks](https://github.com/RaceRocks)
 
 ---
 
@@ -173,7 +159,7 @@ These are the **trusted architects and developers** who collaboratively drive th
 
 We deeply appreciate contributions from the wider open-source community, which help this project grow stronger and more versatile.
 
-* [@amielouwho](https://github.com/amielouwho) | ![Hacktoberfest](https://img.shields.io/badge/-Hacktoberfest%202025-ff69b4) ![Open Source](https://img.shields.io/badge/-Open-Source-green) |
+* [@amielouwho](https://github.com/amielouwho) | ![Hacktoberfest](https://img.shields.io/badge/-Hacktoberfest%202025-ff69b4) ![Open Source](https://img.shields.io/badge/%20open%20source-green) |
 
 > Outside contributions — code, documentation, bug fixes, ideas — are always welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to get involved.
 
