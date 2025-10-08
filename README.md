@@ -17,14 +17,23 @@ This makes it easier to prototype, test, and integrate xAPI-based learning data 
     ```ruby
     gem "active_lrs", git: "https://github.com/RaceRocks/activelrs"
     ```
-    (Default behavior will use the main branch for building the gem, you can specify the branch you want by appending `branch: 'branch-name'` to the line above.)
+    This will install the most recent version of the gem to your rails app.  
+    
+    For a specific branch of the gem use 
+    ```ruby
+    gem "active_lrs", git: "https://github.com/RaceRocks/activelrs" branch: <the branch name>
+    ```
 
-2. Then from your project directory, run:
+2. Save your `Gemfile` and run:
     ```bash
     bundle install
     ```
+    or
+    ```bash
+    bundle update
+    ```
 
-3. Next, you need to run the generator:
+3. To install active_lrs, run the rails generator from your rails app directory:
     ```bash
     rails generate active_lrs:install
     ```
@@ -120,6 +129,31 @@ bundle exec rubocop path/to/file.rb
 # Use the -A flag to auto-correct violations:
 bundle exec rubocop -A
 ```
+
+## Core Maintainers and Authors
+
+This project is actively maintained by the **Racerocks Core Engineering Team**, a specialized group dedicated to building **robust, next-generation training software**.
+
+These are the **trusted architects and developers** who collaboratively drive the vision, manage the repository, and ensure the quality and stability of `activelrs`. They represent our unified expertise in modern learning data systems.
+
+| Name | Role / Focus Area | GitHub Profile | Company Title |
+| :--- | :--- | :--- | :--- |
+| **Amie Walton** | Architect & Standards Lead (TLA/IEEE) | [@AmieAtRR](https://github.com/AmieAtRR) | VP of Technology |
+| **Justin Granofsky** | Core Maintainer / Contributor | [@justinGranof](https://github.com/justinGranof) | Full Stack Developer |
+| **Ira Susanto** | Core Maintainer / Contributor | [@ira-susanto](https://github.com/ira-susanto) | Full Stack Developer |
+| **Sam Foran** | Core Maintainer / Contributor  | [@s-foran](https://github.com/s-foran) | Full Stack Developer |
+
+---
+
+
+## Community Contributors
+
+We deeply appreciate contributions from the wider open-source community, which help this project grow stronger and more versatile.
+
+* [@amielouwho](https://github.com/amielouwho) | ![Hacktoberfest](https://img.shields.io/badge/-Hacktoberfest%202025-ff69b4) ![Open Source](https://img.shields.io/badge/%20open%20source-green) |
+
+> Outside contributions — code, documentation, bug fixes, ideas — are always welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to get involved.
+
 
 ## Attribution
 
