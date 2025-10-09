@@ -110,6 +110,18 @@ module ActiveLrs
       new.limit(num)
     end
 
+    # Shortcut for 'count' on a new instance.
+    #
+    # @param conditions [Hash] Filtering conditions
+    # @return [Integer]
+    def self.count(conditions = {})
+      if conditions.empty?
+        new.count
+      else
+        new.where(conditions).count
+      end
+    end
+
     # @!endgroup
 
     # Initializes a new query object.
@@ -158,6 +170,13 @@ module ActiveLrs
     def limit(num)
       @limit = num
       self
+    end
+
+    # Counts the statements returned by the current query.
+    #
+    # @return [Integer]
+    def count
+      to_a.size
     end
 
     # Iterates over the filtered statements.
