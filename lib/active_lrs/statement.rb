@@ -54,7 +54,12 @@ module ActiveLrs
       statements = []
 
       self.remote_lrs_instances.each do |lrs|
-        client = ActiveLrs::Client.new(url: lrs["url"], username: lrs["username"], password: lrs["password"])
+        client = ActiveLrs::Client.new(
+          url: lrs["url"],
+          username: lrs["username"],
+          password: lrs["password"],
+          more_attribute: lrs["more_attribute"] || "more"
+        )
 
         statements.concat(self::VERBS.values.flat_map do |iri|
           client.fetch_statements(verb: iri)
