@@ -14,11 +14,17 @@ module ActiveLrs
 
   # Autoload configuration and client classes
   autoload :Configuration, "active_lrs/configuration"
+  autoload :Connections, "active_lrs/connections"
+  autoload :Connection, "active_lrs/connection"
   autoload :Statement, "active_lrs/statement"
   autoload :Client, "active_lrs/client"
   autoload :Error, "active_lrs/error"
 
   class << self
+    def connections
+      @connections ||= Connections.new
+    end
+
     # Access the global ActiveLrs configuration.
     #
     # @return [ActiveLrs::Configuration] the current configuration
