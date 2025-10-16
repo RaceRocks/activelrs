@@ -17,7 +17,6 @@ module ActiveLrs
   autoload :Connections, "active_lrs/connections"
   autoload :Connection, "active_lrs/connection"
   autoload :Statement, "active_lrs/statement"
-  autoload :Client, "active_lrs/client"
   autoload :Error, "active_lrs/error"
   autoload :HttpError, "active_lrs/error"
   autoload :ParseError, "active_lrs/error"
