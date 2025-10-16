@@ -7,23 +7,41 @@ module ActiveLrs
   class Connection
     extend Forwardable
 
+    # @return [String] The name of the LRS
     attr_reader :name
 
+    # @return [String] The base URL of the LRS
     attr_reader :url
 
+    # @return [String] Username for Basic Authentication
     attr_reader :username
 
+    # @return [String] Password for Basic Authentication
     attr_reader :password
 
+    # @return [String] The xAPI version to use
     attr_reader :version
 
+    # @return [String] The attribute path for pagination (e.g., "more" or "pagination.more")
     attr_reader :more_attribute
 
+    # @return [Faraday::Connection] The Faraday Connection instance
     attr_reader :faraday_connection
 
+    # Delegate HTTP verbs to the Faraday connection
     def_delegators :faraday_connection, :get, :post, :put, :delete
 
-    def initialize(name:, url:, username:, password:, version:, more_attribute:)
+    # Initializes a new LRS Connection.
+    #
+    # @param name [String] The name of the LRS
+    # @param url [String] The base URL of the LRS
+    # @param username [String] Username for Basic Authentication
+    # @param password [String] Password for Basic Authentication
+    # @param more_attribute [String] Attribute path for pagination URL (defaults to "more")
+    # @param version [String] The xAPI version (defaults to "2.0.0")
+    #
+    # @return [void]
+    def initialize(name:, url:, username:, password:, version: nil, more_attribute: nil)
       @name = name
       @url = url
       @username = username

@@ -6,16 +6,24 @@ class ActiveLrs::Connections
     @connections ||= []
   end
 
-  def set(connections)
-    @connections = connections
-  end
-
   def all
     @connections
   end
 
+  def set(connections)
+    @connections = connections
+  end
+
   def clear
     set([])
+  end
+
+  def use(connections)
+    previous_connections = all
+
+    set(connections)
+    yield
+    set(previous_connections)
   end
 
   def load_connections_from_file(path)
