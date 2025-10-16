@@ -265,10 +265,10 @@ module ActiveLrs
 
     private
 
-    # Helper for counting statements grouped by a field. 
-    # 
+    # Helper for counting statements grouped by a field.
+    #
     # @param statements [Array<ActiveLrs::Xapi::Statement>] Array of xAPI statement objects to count
-    # @return [Hash] Hash of grouped counts 
+    # @return [Hash] Hash of grouped counts
     def group_count(statements)
       counts = {}
 
