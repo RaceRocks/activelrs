@@ -136,5 +136,46 @@ RSpec.describe ActiveLrs::Statement do
                             .where("verb.id": "http://adlnet.gov/expapi/verbs/launched")
       end.to raise_error(NoMethodError)
     end
+
+    it "can group and count all statements" do
+      results = ActiveLrs::Statement.group("actor.name").count
+      expect(results).to eq({ "John Doe" => 5 })
+    end
+
+    it "can group and count statements from a simple query" do
+      results = ActiveLrs::Statement.where("verb.id": "http://adlnet.gov/expapi/verbs/initialized").group("actor.name").count
+      expect(results).to eq({ "John Doe" => 1 })
+    end
+
+    it "can group and count statements from a simple query passing a filter through the count method" do
+      results = ActiveLrs::Statement.group("actor.name").count("verb.id": "http://adlnet.gov/expapi/verbs/initialized")
+      expect(results).to eq({ "John Doe" => 1 })
+    end
+
+    it "can group and count statements from a chained query with multiple conditions" do
+      results = ActiveLrs::Statement.where("actor.name": "John Doe")
+                                    .since("2025-01-01T15:34:43.401Z")
+                                    .group("verb.id")
+                                    .count
+      expect(results).to eq({ "http://adlnet.gov/expapi/verbs/terminated" => 1 })
+    end
+
+    it "can group and count statements after applying a limit" do
+      results = ActiveLrs::Statement.limit(4).group("actor.name").count
+      expect(results).to eq({ "John Doe" => 4 })
+    end
+
+    it "returns nothing when grouping by a non-existent field" do
+      results = ActiveLrs::Statement.group("nonexistent.field").count
+      expect(results).to eq({})
+    end
+
+    it "returns a query object with group_by applied that can be later counted" do
+      query = ActiveLrs::Statement.group("actor.name")
+      expect(query.instance_variable_get(:@group_by)).to eq("actor.name")
+
+      results = query.count
+      expect(results).to eq({ "John Doe" => 5 })
+    end
   end
 end
