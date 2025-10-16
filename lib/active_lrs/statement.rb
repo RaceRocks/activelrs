@@ -128,6 +128,14 @@ module ActiveLrs
       end
     end
 
+    # Shortcut for 'group' on a new instance.
+    #
+    # @param field [String] Field to group by
+    # @return [ActiveLrs::Statement]
+    def self.group(field)
+      new.group(field)
+    end
+
     # @!endgroup
 
     # Initializes a new query object.
@@ -139,6 +147,7 @@ module ActiveLrs
       @sort_key = nil
       @sort_direction = nil
       @limit = nil
+      @group_by = nil
     end
 
     # Adds filtering conditions.
@@ -178,11 +187,31 @@ module ActiveLrs
       self
     end
 
-    # Counts the statements returned by the current query.
+    # Counts statements, optionally applying additional conditions.
     #
-    # @return [Integer]
-    def count
-      to_a.size
+    # @param conditions [Hash] Additional filtering conditions (optional)
+    # @return [Integer, Hash] Returns an integer if no grouping is applied, or a hash if grouped
+    def count(conditions = {})
+      unless conditions.empty?
+        return where(conditions).count
+      end
+
+      results = to_a
+
+      if @group_by.nil?
+        results.size
+      else
+        group_count(results)
+      end
+    end
+
+    # Groups statements by a specified field.
+    #
+    # @param field [String] Field to group by
+    # @return [ActiveLrs::Statement] self
+    def group(field)
+      @group_by = field
+      self
     end
 
     # Iterates over the filtered statements.
@@ -235,6 +264,23 @@ module ActiveLrs
     end
 
     private
+
+    # Helper for counting statements grouped by a field. 
+    # 
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] Array of xAPI statement objects to count
+    # @return [Hash] Hash of grouped counts 
+    def group_count(statements)
+      counts = {}
+
+      statements.each do |statement|
+        key = dig_via_methods(statement, @group_by)
+        next if key.nil?
+
+        counts[key] ||= 0
+        counts[key] += 1
+      end
+      counts
+    end
 
     # Helper to dig into nested attributes using method chains.
     #
