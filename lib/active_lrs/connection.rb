@@ -4,6 +4,19 @@ require "faraday"
 require "forwardable"
 
 module ActiveLrs
+  # Provides a class representing an LRS connection, as well as an HTTP client for
+  # connecting to the remote Learning Record Store (LRS). Faraday is used for requests
+  # and supports basic authentication.
+  #
+  # @example
+  #   connection = ActiveLrs::Connection.new(
+  #     name: "My LRS",
+  #     url: "https://lrs.example.com/",
+  #     username: "user",
+  #     password: "password"
+  #   )
+  #
+  #   xapi_statements = connection.fetch_statements
   class Connection
     extend Forwardable
 

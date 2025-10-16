@@ -23,6 +23,9 @@ module ActiveLrs
   autoload :ConfigurationError, "active_lrs/error"
 
   class << self
+    # Access the global ActiveLrs connections
+    #
+    # @return [ActiveLrs::Connections] the Connections object
     def connections
       @connections ||= Connections.new
     end
