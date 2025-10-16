@@ -53,17 +53,9 @@ module ActiveLrs
     def self.fetch
       statements = []
 
-      self.remote_lrs_instances.each do |lrs|
-        client = ActiveLrs::Client.new(
-          url: lrs["url"],
-          username: lrs["username"],
-          password: lrs["password"],
-          more_attribute: lrs["more_attribute"] || "more",
-          version: lrs["version"] || "2.0.0"
-        )
-
+      ActiveLrs.connections.all.each do |connection|
         statements.concat(self::VERBS.values.flat_map do |iri|
-          client.fetch_statements(verb: iri)
+          connection.fetch_statements(verb: iri)
         end.compact.map { |statement| ActiveLrs::Xapi::Statement.new(statement) }).uniq!(&:id)
       end
 

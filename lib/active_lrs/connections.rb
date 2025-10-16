@@ -14,6 +14,10 @@ class ActiveLrs::Connections
     @connections
   end
 
+  def clear
+    set([])
+  end
+
   def load_connections_from_file(path)
     if File.exist?(path)
       raw = ERB.new(File.read(path)).result
