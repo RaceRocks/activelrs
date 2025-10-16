@@ -289,7 +289,11 @@ module ActiveLrs
     # @return [Object, nil] The nested value
     def dig_via_methods(object, path)
       path.to_s.split(".").reduce(object) do |current_object, method|
-        current_object&.public_send(method)
+        begin
+          current_object&.public_send(method)
+        rescue NoMethodError
+          return nil
+        end
       end
     end
 
