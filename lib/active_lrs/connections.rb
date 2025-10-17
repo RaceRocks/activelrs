@@ -43,13 +43,15 @@ module ActiveLrs
     # After execution, the connections will be reverted to the prior state.
     #
     # @param connections [Array<ActiveLrs::Connection>] The connections to be used in the block
-    # @return [Array<ActiveLrs::Connection>] Array of ActiveLrs::Connection objects
+    # @return The return value of the executed block
     def use(connections)
       previous_connections = all
 
       set(connections)
-      yield
+      result = yield
       set(previous_connections)
+
+      result
     end
 
     # Loads and sets LRS connections from a given file. If the file is missing,

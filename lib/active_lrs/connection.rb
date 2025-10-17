@@ -63,6 +63,9 @@ module ActiveLrs
       @more_attribute = more_attribute || "more"
     end
 
+    # Get the faraday connection used to fetch data from the LRS
+    #
+    # @return [Faraday] the faraday instance
     def faraday_connection
       @faraday_connection ||= Faraday.new(url: url) do |conn|
         conn.headers["X-Experience-API-Version"] = version
@@ -105,6 +108,10 @@ module ActiveLrs
       statements
     end
 
+    # Parse a hash of connection information into a Connection object
+    #
+    # @param hash_connection [Hash] containing connection information (name, url, username, etc)
+    # @return [ActiveLrs::Connection] the parsed Connection object
     def self.parse(hash_connection)
       new(
         name: hash_connection["name"],

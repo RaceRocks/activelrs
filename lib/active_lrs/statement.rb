@@ -39,13 +39,6 @@ module ActiveLrs
       @data = new_data
     end
 
-    # Returns the configured remote LRS endpoints.
-    #
-    # @return [Array<Hash>] Array of endpoint hashes from configuration
-    def self.remote_lrs_instances
-      ActiveLrs.configuration.remote_lrs_instances
-    end
-
     # Fetches statements from all configured LRS endpoints.
     #
     # @return [Array<ActiveLrs::Xapi::Statement>] Array of statements
