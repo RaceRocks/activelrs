@@ -2,9 +2,9 @@ PATH
   remote: .
   specs:
     active_lrs (0.1.0)
-      faraday (>= 2.10)
-      rails (>= 8.0)
-      ruby-duration (>= 3.2)
+      faraday (~> 2.10)
+      rails (>= 7.0)
+      ruby-duration (~> 3.2)
 
 GEM
   remote: https://rubygems.org/
