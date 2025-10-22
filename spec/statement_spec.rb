@@ -103,7 +103,7 @@ RSpec.describe ActiveLrs::Statement do
       end
     end
 
-    describe "Aggregation behaviour" do 
+    describe "Aggregation behaviour" do
       let(:statements) do
         JSON.parse(fixture_contents("cmi5_grouping_test_statements.json")).map do |json|
           ActiveLrs::Xapi::Statement.new(json)
@@ -115,12 +115,12 @@ RSpec.describe ActiveLrs::Statement do
           results = ActiveLrs::Statement.count
           expect(results).to eq(6)
         end
-    
+
         it "can count simple queries" do
           results = ActiveLrs::Statement.where("actor.name": "Alice").count
           expect(results).to eq(3)
         end
-    
+
         it "can count chained queries" do
           results = ActiveLrs::Statement
             .where("verb.id": "http://adlnet.gov/expapi/verbs/initialized")
@@ -133,12 +133,12 @@ RSpec.describe ActiveLrs::Statement do
           results = ActiveLrs::Statement.count("actor.name": "Bob")
           expect(results).to eq(2)
         end
-    
+
         it "can count statements given multiple conditions" do
           results = ActiveLrs::Statement.count("actor.name": "Bob", "verb.id": "http://adlnet.gov/expapi/verbs/completed")
           expect(results).to eq(1)
         end
-    
+
         it "cannot query a counted query" do
           expect do
             ActiveLrs::Statement.where("actor.name": "Alice")
@@ -176,7 +176,7 @@ RSpec.describe ActiveLrs::Statement do
           results = ActiveLrs::Statement.group("nonexistent.field").count
           expect(results).to eq({ nil => 6 })
         end
-        
+
         it "counts statements with partially missing fields" do
           results = ActiveLrs::Statement.group("object.definition.description").count
           expect(results).to eq({
@@ -194,22 +194,22 @@ RSpec.describe ActiveLrs::Statement do
 
       it "orders grouped results ascending by count" do
         results = ActiveLrs::Statement.order(count: :asc).group("actor.name").count
-        expect(results).to eq({"Charlie" => 1, "Bob" => 2, "Alice" => 3})
+        expect(results).to eq({ "Charlie" => 1, "Bob" => 2, "Alice" => 3 })
       end
 
       it "order grouped results descending by count" do
         results = ActiveLrs::Statement.order(count: :desc).group("actor.name").count
-        expect(results).to eq({"Alice" => 3, "Bob" => 2, "Charlie" => 1})
+        expect(results).to eq({ "Alice" => 3, "Bob" => 2, "Charlie" => 1 })
       end
 
       it "applies limit after ordering ascending" do
         results = ActiveLrs::Statement.order(count: :asc).limit(1).group("actor.name").count
-        expect(results).to eq({"Charlie" => 1})
+        expect(results).to eq({ "Charlie" => 1 })
       end
 
       it "applies limit after ordering descending" do
         results = ActiveLrs::Statement.order(count: :desc).limit(1).group("actor.name").count
-        expect(results).to eq({"Alice" => 3})
+        expect(results).to eq({ "Alice" => 3 })
       end
     end
   end
