@@ -269,8 +269,6 @@ module ActiveLrs
 
       statements.each do |statement|
         key = dig_via_methods(statement, @group_by)
-        next if key.nil?
-
         counts[key] ||= 0
         counts[key] += 1
       end

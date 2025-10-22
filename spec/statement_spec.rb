@@ -172,9 +172,18 @@ RSpec.describe ActiveLrs::Statement do
           expect(results).to eq({ "http://adlnet.gov/expapi/verbs/terminated" => 1 })
         end
 
-        it "returns nothing when grouping by a non-existent field" do
+        it "counts nil for a completely missing field" do
           results = ActiveLrs::Statement.group("nonexistent.field").count
-          expect(results).to eq({})
+          expect(results).to eq({ nil => 6 })
+        end
+        
+        it "counts statements with partially missing fields" do
+          results = ActiveLrs::Statement.group("object.definition.description").count
+          expect(results).to eq({
+            nil => 1,
+            { "en-US" => "Introductory math course" } => 4,
+            { "en-US" => "Intermediate science course" } => 1
+          })
         end
 
         it "returns a query object with group_by applied that can be later counted" do
