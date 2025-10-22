@@ -253,7 +253,7 @@ module ActiveLrs
       end
 
       # Apply limit
-      results = results.first(@limit) if @limit
+      results = results.first(@limit) if @limit && @group_by.nil?
 
       results
     end
