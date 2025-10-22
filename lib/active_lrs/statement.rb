@@ -128,6 +128,14 @@ module ActiveLrs
       end
     end
 
+    # Shortcut for 'group' on a new instance.
+    #
+    # @param field [String] Field to group by
+    # @return [ActiveLrs::Statement]
+    def self.group(field)
+      new.group(field)
+    end
+
     # @!endgroup
 
     # Initializes a new query object.
@@ -139,6 +147,7 @@ module ActiveLrs
       @sort_key = nil
       @sort_direction = nil
       @limit = nil
+      @group_by = nil
     end
 
     # Adds filtering conditions.
@@ -178,11 +187,26 @@ module ActiveLrs
       self
     end
 
-    # Counts the statements returned by the current query.
+    # Counts statements, optionally applying additional conditions.
     #
-    # @return [Integer]
-    def count
-      to_a.size
+    # @param conditions [Hash] Additional filtering conditions (optional)
+    # @return [Integer, Hash] Returns an integer if no grouping is applied, or a hash if grouped
+    def count(conditions = {})
+      return where(conditions).count unless conditions.empty?
+
+      results = to_a
+      return results.size unless @group_by
+
+      group_count(results)
+    end
+
+    # Groups statements by a specified field.
+    #
+    # @param field [String] Field to group by
+    # @return [ActiveLrs::Statement] self
+    def group(field)
+      @group_by = field
+      self
     end
 
     # Iterates over the filtered statements.
@@ -229,12 +253,33 @@ module ActiveLrs
       end
 
       # Apply limit
-      results = results.first(@limit) if @limit
+      results = results.first(@limit) if @limit && @group_by.nil?
 
       results
     end
 
     private
+
+    # Helper for counting statements grouped by a field.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] Array of xAPI statement objects to count
+    # @return [Hash] Hash of grouped counts
+    def group_count(statements)
+      counts = {}
+
+      statements.each do |statement|
+        key = dig_via_methods(statement, @group_by)
+        counts[key] ||= 0
+        counts[key] += 1
+      end
+
+      # Sort counts by ascending as default
+      sorted_counts = counts.sort_by(&:last)
+      sorted_counts.reverse! if @sort_direction == :desc
+
+      sorted_counts = sorted_counts.first(@limit) if @limit
+      sorted_counts.to_h
+    end
 
     # Helper to dig into nested attributes using method chains.
     #
@@ -243,7 +288,11 @@ module ActiveLrs
     # @return [Object, nil] The nested value
     def dig_via_methods(object, path)
       path.to_s.split(".").reduce(object) do |current_object, method|
-        current_object&.public_send(method)
+        begin
+          current_object&.public_send(method)
+        rescue NoMethodError
+          return nil
+        end
       end
     end
 
