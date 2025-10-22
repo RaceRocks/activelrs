@@ -192,17 +192,12 @@ module ActiveLrs
     # @param conditions [Hash] Additional filtering conditions (optional)
     # @return [Integer, Hash] Returns an integer if no grouping is applied, or a hash if grouped
     def count(conditions = {})
-      unless conditions.empty?
-        return where(conditions).count
-      end
+      return where(conditions).count unless conditions.empty?
 
       results = to_a
+      return results.size unless @group_by
 
-      if @group_by.nil?
-        results.size
-      else
-        group_count(results)
-      end
+      group_count(results)
     end
 
     # Groups statements by a specified field.
@@ -279,7 +274,13 @@ module ActiveLrs
         counts[key] ||= 0
         counts[key] += 1
       end
-      counts
+
+      # Sort counts by ascending as default
+      sorted_counts = counts.sort_by(&:last)
+      sorted_counts.reverse! if @sort_direction == :desc
+
+      sorted_counts = sorted_counts.first(@limit) if @limit
+      sorted_counts.to_h
     end
 
     # Helper to dig into nested attributes using method chains.
