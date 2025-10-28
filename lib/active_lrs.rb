@@ -2,6 +2,7 @@
 
 require_relative "active_lrs/version"
 require_relative "active_lrs/railtie" if defined?(Rails::Railtie)
+require_relative "active_lrs/error"
 require "json"
 
 # Top-level namespace for ActiveLrs, a Ruby client for xAPI/LRS interactions.
@@ -16,7 +17,6 @@ module ActiveLrs
   autoload :Configuration, "active_lrs/configuration"
   autoload :Statement, "active_lrs/statement"
   autoload :Client, "active_lrs/client"
-  autoload :Error, "active_lrs/error"
 
   class << self
     # Access the global ActiveLrs configuration.
