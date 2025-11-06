@@ -291,7 +291,7 @@ module ActiveLrs
     end
 
 
-    # Helper for formatting timestamps for the grouped_count method. 
+    # Helper for formatting timestamps for the grouped_count method.
     #
     # @param time [Time] The timestamp to format.
     # @param period [Symbol] The period to group by. One of `:day`, `:week`, or `:month`.
