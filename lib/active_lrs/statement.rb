@@ -130,10 +130,11 @@ module ActiveLrs
 
     # Shortcut for 'group' on a new instance.
     #
-    # @param field [String] Field to group by
+    # @param field [String] Field to group by (e.g., "actor.name", or "timestamp")
+    # @param period [Symbol, nil] Optional time period for timestamp grouping
     # @return [ActiveLrs::Statement]
-    def self.group(field)
-      new.group(field)
+    def self.group(field, period: nil)
+      new.group(field, period: period)
     end
 
     # @!endgroup
@@ -148,6 +149,7 @@ module ActiveLrs
       @sort_direction = nil
       @limit = nil
       @group_by = nil
+      @period = nil
     end
 
     # Adds filtering conditions.
@@ -197,15 +199,17 @@ module ActiveLrs
       results = to_a
       return results.size unless @group_by
 
-      group_count(results)
+      grouped_count(results)
     end
 
     # Groups statements by a specified field.
     #
-    # @param field [String] Field to group by
+    # @param field [String, Symbol] The field name to group by.
+    # @param period [Symbol, nil] Optional time period for timestamp grouping.
     # @return [ActiveLrs::Statement] self
-    def group(field)
+    def group(field, period: nil)
       @group_by = field
+      @period = period
       self
     end
 
@@ -264,11 +268,16 @@ module ActiveLrs
     #
     # @param statements [Array<ActiveLrs::Xapi::Statement>] Array of xAPI statement objects to count
     # @return [Hash] Hash of grouped counts
-    def group_count(statements)
+    def grouped_count(statements)
       counts = {}
 
       statements.each do |statement|
         key = dig_via_methods(statement, @group_by)
+
+        if (@group_by.to_s == "timestamp") && @period
+          key = format_group_by_timestamp(key, @period)
+        end
+
         counts[key] ||= 0
         counts[key] += 1
       end
@@ -279,6 +288,27 @@ module ActiveLrs
 
       sorted_counts = sorted_counts.first(@limit) if @limit
       sorted_counts.to_h
+    end
+
+
+    # Helper for formatting timestamps for the grouped_count method. 
+    #
+    # @param time [Time] The timestamp to format.
+    # @param period [Symbol] The period to group by. One of `:day`, `:week`, or `:month`.
+    # @return [String, nil] The formatted time string, or nil if input is not a Time.
+    def format_group_by_timestamp(time, period)
+      return nil unless time.is_a?(Time)
+
+      case period
+      when :day
+        time.utc.strftime("%Y-%m-%d")
+      when :week
+        "#{time.utc.strftime('%G')}-W#{time.utc.strftime('%V')}"
+      when :month
+        time.utc.strftime("%Y-%m")
+      else
+        raise ArgumentError, "Unsupported period: #{period.inspect}"
+      end
     end
 
     # Helper to dig into nested attributes using method chains.
