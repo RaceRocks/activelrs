@@ -30,4 +30,9 @@ module Helpers
     new_definition = object.class.new(hash)
     expect(hash).to eq(new_definition.to_h)
   end
+
+  def expect_hash_with_rounded_values(actual, expected, precision: 3)
+    rounded = actual.transform_values { |v| v.round(precision) }
+    expect(rounded).to eq(expected)
+  end
 end
