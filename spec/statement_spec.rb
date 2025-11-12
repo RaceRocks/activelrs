@@ -101,7 +101,7 @@ RSpec.describe ActiveLrs::Statement do
       end
     end
 
-    context "Aggregation behaviour" do
+    describe "Count Aggregation behaviour" do
       let(:statements) do
         JSON.parse(fixture_contents("cmi5_grouping_test_statements.json")).map do |json|
           ActiveLrs::Xapi::Statement.new(json)
@@ -211,75 +211,225 @@ RSpec.describe ActiveLrs::Statement do
           expect(results).to eq({ "Charlie" => 1 })
         end
 
-        it "applies limit after ordering descending" do
-          results = ActiveLrs::Statement.order(count: :desc).limit(1).group("actor.name").count
-          expect(results).to eq({ "Alice" => 3 })
+      it "applies limit after ordering descending" do
+        results = ActiveLrs::Statement.order(count: :desc).limit(1).group("actor.name").count
+        expect(results).to eq({ "Alice" => 3 })
+      end
+    end
+
+    describe "Average Aggregation behaviour" do
+      let(:statements) do
+        JSON.parse(fixture_contents("cmi5_average_test_statements.json")).map do |json|
+          ActiveLrs::Xapi::Statement.new(json)
         end
       end
 
-      context "Grouped by timestamp counting" do
-        it "groups by day" do
-          results = ActiveLrs::Statement.group("timestamp", period: :day).count
-          expect(results).to eq({ "2025-01-01" => 3, "2025-01-02" => 2, "2025-01-03" => 1 })
+      context "Basic averaging" do
+        it "can average all statements" do
+          results = ActiveLrs::Statement.average("result.score.raw")
+          expect(results.round(3)).to eq(74.800)
         end
 
-        it "groups by week" do
-          results = ActiveLrs::Statement.group("timestamp", period: :week).count
-          expect(results).to eq({ "2025-W01" => 6 })
+        it "can average simple queries" do
+          results = ActiveLrs::Statement.where("object.id": "http://example.com/activities/quiz-1").average("result.score.raw")
+          expect(results.round(3)).to eq(62.667)
         end
 
-        it "groups by month" do
-          results = ActiveLrs::Statement.group("timestamp", period: :month).count
-          expect(results).to eq({ "2025-01" => 6 })
+        it "can average chained queries" do
+          results = ActiveLrs::Statement
+            .where("object.id": "http://example.com/activities/quiz-1")
+            .since("2025-10-03T00:00:00Z")
+            .average("result.score.raw")
+          expect(results.round(3)).to eq(58.000)
         end
 
-        it "filters and groups within a time range" do
-          results = ActiveLrs::Statement.since("2025-01-02T00:00:00Z")
-                                        .group("timestamp", period: :day)
-                                        .count
-          expect(results).to eq({ "2025-01-02" => 2, "2025-01-03" => 1 })
+        it "can average statements given multiple conditions" do
+          results = ActiveLrs::Statement
+            .where("object.id": "http://example.com/activities/quiz-1")
+            .where("verb.id": "http://adlnet.gov/expapi/verbs/passed")
+            .average("result.score.raw")
+          expect(results.round(3)).to eq(85.000)
         end
 
-        it "returns empty results for future-only ranges" do
-          results = ActiveLrs::Statement.since("2030-01-01T00:00:00Z")
-                                        .group("timestamp", period: :day)
-                                        .count
-          expect(results).to eq({})
+        it "cannot average empty parameter" do
+          expect do
+            ActiveLrs::Statement
+              .where("object.id": "http://example.com/activities/quiz-1")
+              .average
+          end.to raise_error(ArgumentError)
         end
 
-        it "groups by day after filtering and ordering" do
-          results = ActiveLrs::Statement.where("actor.name": "Alice")
-                                        .order(timestamp: :asc)
-                                        .group("timestamp", period: :day)
-                                        .count
-          expect(results).to eq({ "2025-01-01" => 2, "2025-01-03" => 1 })
+        it "would return 0.0 for unknown parameter" do
+          results = ActiveLrs::Statement.average("unknown.parameter")
+          expect(results).to eq(0.0)
         end
 
-        it "limits grouped results after ordering descending" do
-          results = ActiveLrs::Statement.group("actor.name")
-                                        .order(count: :desc)
-                                        .limit(2)
-                                        .count
-          expect(results).to eq({ "Alice" => 3, "Bob" => 2 })
+        it "cannot query a averaged query" do
+          expect do
+            ActiveLrs::Statement.where("actor.name": "Alice")
+              .average("unknown.parameter")
+              .where("verb.id": "http://adlnet.gov/expapi/verbs/terminated")
+          end.to raise_error(NoMethodError)
+        end
+      end
+
+      context "Grouped averaging" do
+        it "can group and average all statements" do
+          results = ActiveLrs::Statement
+            .group("object.id")
+            .average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            "http://example.com/activities/quiz-1" => 62.667,
+            "http://example.com/activities/quiz-2" => 73.0,
+            "http://example.com/activities/course-1" => 83.333,
+            "http://example.com/activities/quiz-3" => 91.0
+          })
         end
 
-        it "filters, groups by week, and limits results" do
-          results = ActiveLrs::Statement.where("verb.id": "http://adlnet.gov/expapi/verbs/initialized")
-                                        .group("timestamp", period: :week)
-                                        .order(count: :desc)
-                                        .limit(1)
-                                        .count
-          expect(results).to eq({ "2025-W01" => 2 })
+        it "can group and average statements from a simple query" do
+          results = ActiveLrs::Statement
+            .where("object.id": "http://example.com/activities/quiz-1")
+            .group("verb.id")
+            .average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            "http://adlnet.gov/expapi/verbs/passed" => 85.0,
+            "http://adlnet.gov/expapi/verbs/failed" => 45.0,
+            "http://adlnet.gov/expapi/verbs/attempted" => 58.0
+          })
         end
 
-        it "filters by verb and actor, groups by month, and orders ascending" do
-          results = ActiveLrs::Statement.where("actor.name": "Bob")
-                                        .where("verb.id": "http://adlnet.gov/expapi/verbs/completed")
-                                        .group("timestamp", period: :month)
-                                        .order(count: :asc)
-                                        .count
-          expect(results).to eq({ "2025-01" => 1 })
+        it "can group and average statements from a chained query with multiple conditions" do
+          results = ActiveLrs::Statement
+            .where("object.id": "http://example.com/activities/quiz-1")
+            .since("2025-10-03T00:00:00Z")
+            .group("verb.id")
+            .average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, { "http://adlnet.gov/expapi/verbs/attempted" => 58.0 })
         end
+
+        it "averages nil for a completely missing field" do
+          results = ActiveLrs::Statement.group("nonexistent.field").average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, { nil => 74.800 })
+        end
+
+        it "averages statements with partially missing fields" do
+          results = ActiveLrs::Statement
+            .where("object.id": "http://example.com/activities/quiz-1")
+            .group("verb.display")
+            .average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            { "en-US" => "passed" } => 85.0,
+            { "en-US" => "failed" } => 45.0,
+            nil => 58.0 })
+        end
+
+        it "orders grouped results ascending by average" do
+          results = ActiveLrs::Statement.order(average: :asc).group("object.id").average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            "http://example.com/activities/quiz-1" => 62.667,
+            "http://example.com/activities/quiz-2" => 73.0,
+            "http://example.com/activities/course-1" => 83.333,
+            "http://example.com/activities/quiz-3" => 91.0
+          })
+        end
+
+        it "order grouped results descending by average" do
+          results = ActiveLrs::Statement.order(average: :desc).group("object.id").average("result.score.raw")
+          expect_hash_with_rounded_values(results, {
+            "http://example.com/activities/quiz-3" => 91.0,
+            "http://example.com/activities/course-1" => 83.333,
+            "http://example.com/activities/quiz-2" => 73.0,
+            "http://example.com/activities/quiz-1" => 62.667
+          })
+        end
+
+        it "applies limit after ordering ascending" do
+          results = ActiveLrs::Statement.order(average: :asc).limit(1).group("object.id").average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            "http://example.com/activities/quiz-1" => 62.667
+          })
+        end
+
+        it "applies limit after ordering descending" do
+          results = ActiveLrs::Statement.order(average: :desc).limit(2).group("object.id").average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            "http://example.com/activities/quiz-3" => 91.0,
+            "http://example.com/activities/course-1" => 83.333
+          })
+        end
+      end
+    end
+
+    describe "Grouped by timestamp counting" do
+      it "groups by day" do
+        results = ActiveLrs::Statement.group("timestamp", period: :day).count
+        expect(results).to eq({ "2025-01-01" => 3, "2025-01-02" => 2, "2025-01-03" => 1 })
+      end
+
+      it "groups by week" do
+        results = ActiveLrs::Statement.group("timestamp", period: :week).count
+        expect(results).to eq({ "2025-W01" => 6 })
+      end
+
+      it "groups by month" do
+        results = ActiveLrs::Statement.group("timestamp", period: :month).count
+        expect(results).to eq({ "2025-01" => 6 })
+      end
+
+      it "filters and groups within a time range" do
+        results = ActiveLrs::Statement.since("2025-01-02T00:00:00Z")
+                                      .group("timestamp", period: :day)
+                                      .count
+        expect(results).to eq({ "2025-01-02" => 2, "2025-01-03" => 1 })
+      end
+
+      it "returns empty results for future-only ranges" do
+        results = ActiveLrs::Statement.since("2030-01-01T00:00:00Z")
+                                      .group("timestamp", period: :day)
+                                      .count
+        expect(results).to eq({})
+      end
+
+      it "groups by day after filtering and ordering" do
+        results = ActiveLrs::Statement.where("actor.name": "Alice")
+                                      .order(timestamp: :asc)
+                                      .group("timestamp", period: :day)
+                                      .count
+        expect(results).to eq({ "2025-01-01" => 2, "2025-01-03" => 1 })
+      end
+
+      it "limits grouped results after ordering descending" do
+        results = ActiveLrs::Statement.group("actor.name")
+                                      .order(count: :desc)
+                                      .limit(2)
+                                      .count
+        expect(results).to eq({ "Alice" => 3, "Bob" => 2 })
+      end
+
+      it "filters, groups by week, and limits results" do
+        results = ActiveLrs::Statement.where("verb.id": "http://adlnet.gov/expapi/verbs/initialized")
+                                      .group("timestamp", period: :week)
+                                      .order(count: :desc)
+                                      .limit(1)
+                                      .count
+        expect(results).to eq({ "2025-W01" => 2 })
+      end
+
+      it "filters by verb and actor, groups by month, and orders ascending" do
+        results = ActiveLrs::Statement.where("actor.name": "Bob")
+                                      .where("verb.id": "http://adlnet.gov/expapi/verbs/completed")
+                                      .group("timestamp", period: :month)
+                                      .order(count: :asc)
+                                      .count
+        expect(results).to eq({ "2025-01" => 1 })
       end
     end
   end

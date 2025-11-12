@@ -137,6 +137,22 @@ module ActiveLrs
       new.group(field, period: period)
     end
 
+    # Shortcut for 'average' on a new instance.
+    #
+    # @param field [String] Field to calculate average on
+    # @return [ActiveLrs::Statement]
+    def self.average(field)
+      new.average(field)
+    end
+
+    # Shortcut for 'average' on a new instance.
+    #
+    # @param field [String] Field to calculate average on
+    # @return [ActiveLrs::Statement]
+    def self.average(field)
+      new.average(field)
+    end
+
     # @!endgroup
 
     # Initializes a new query object.
@@ -199,7 +215,16 @@ module ActiveLrs
       results = to_a
       return results.size unless @group_by
 
-      grouped_count(results)
+      apply_group_count(results)
+    end
+
+    # Calculate the average value of the specified field from statements.
+    #
+    # @param field [String] Field to calculate average on
+    # @return [ActiveLrs::Statement] self
+    def average(field)
+      statements = to_a
+      @group_by ? apply_group_average(statements, field) : apply_average(statements, field)
     end
 
     # Groups statements by a specified field.
@@ -226,69 +251,22 @@ module ActiveLrs
     # @return [Array<ActiveLrs::Xapi::Statement>] Array of statements
     def to_a
       results = self.class.data
+
       # Apply where conditions on data
-      unless @where_conditions.empty?
-        results = results.select do |result|
-          @where_conditions.all? do |conditions|
-            conditions.all? do |key, value|
-              statement_value = dig_via_methods(result, key)
+      results = apply_where_conditions(results) unless @where_conditions.empty?
 
-              value = value.is_a?(Symbol) ? resolve_verb_symbol_to_string_iri(value) : value
+      if @group_by.nil?
+        # Apply sorting
+        results = apply_sort(results) unless @sort_key.nil?
 
-              if key == :verb
-                value = value.is_a?(Symbol) ? resolve_verb_symbol_to_string_iri(value) : value
-                statement_value == value
-              elsif key == :timestamp && value.is_a?(Time)
-                statement_value >= value
-              else
-                statement_value == value
-              end
-            end
-          end
-        end
+        # Apply limit
+        results = apply_limit(results) unless @limit.nil?
       end
-
-      # Apply sorting
-      unless @sort_key.nil?
-        results = results.sort_by do |result|
-          value = dig_via_methods(result, @sort_key)
-        end
-        results.reverse! if @sort_direction == :desc
-      end
-
-      # Apply limit
-      results = results.first(@limit) if @limit && @group_by.nil?
 
       results
     end
 
     private
-
-    # Helper for counting statements grouped by a field.
-    #
-    # @param statements [Array<ActiveLrs::Xapi::Statement>] Array of xAPI statement objects to count
-    # @return [Hash] Hash of grouped counts
-    def grouped_count(statements)
-      counts = {}
-
-      statements.each do |statement|
-        key = dig_via_methods(statement, @group_by)
-
-        if (@group_by.to_s == "timestamp") && @period
-          key = format_group_by_timestamp(key, @period)
-        end
-
-        counts[key] ||= 0
-        counts[key] += 1
-      end
-
-      # Sort counts by ascending as default
-      sorted_counts = counts.sort_by(&:last)
-      sorted_counts.reverse! if @sort_direction == :desc
-
-      sorted_counts = sorted_counts.first(@limit) if @limit
-      sorted_counts.to_h
-    end
 
 
     # Helper for formatting timestamps for the grouped_count method.
@@ -347,5 +325,168 @@ module ActiveLrs
     rescue ArgumentError
       nil
     end
+
+    # @!group Helpers for filtering, sorting, grouping, and limiting results
+
+    # Filters an array of results based on @where_conditions.
+    #
+    # @param results [Array] the array of statements to filter
+    # @return [Array] the filtered results
+    def apply_where_conditions(results)
+      results.select do |result|
+        @where_conditions.all? do |conditions|
+          conditions.all? { |key, value| match_condition?(result, key, value) }
+        end
+      end
+    end
+
+    # Checks if a single result matches a specific key-value condition.
+    #
+    # @param result [Object] the statement to check
+    # @param key [Symbol] the key to check in the result
+    # @param value [Object] the value to match against
+    # @return [Boolean] true if the result matches the condition, false otherwise
+    def match_condition?(result, key, value)
+      statement_value = dig_via_methods(result, key)
+
+      value = resolve_value(key, value)
+
+      case key
+      when :timestamp
+        value.is_a?(Time) ? statement_value >= value : statement_value == value
+      else
+        statement_value == value
+      end
+    end
+
+    # Resolves a value for comparison, converting symbols to IRIs if needed.
+    #
+    # @param key [Symbol] the key being checked
+    # @param value [Object] the value to resolve
+    # @return [Object] the resolved value
+    def resolve_value(key, value)
+      value.is_a?(Symbol) ? resolve_verb_symbol_to_string_iri(value) : value
+    end
+
+    # Sorts an array of results by a given key or a custom value extractor.
+    #
+    # @param results [Array] the array of records/statements to sort
+    # @param value_extractor [Proc, Symbol, nil] optional custom extractor for sorting
+    # @return [Array] the sorted array
+    def apply_sort(results, value_extractor: nil)
+      sorted = if value_extractor
+          results.sort_by(&value_extractor)
+      else
+          results.sort_by { |result| dig_via_methods(result, @sort_key) }
+      end
+      @sort_direction == :desc ? sorted.reverse : sorted
+    end
+
+    # Limits the number of results returned.
+    #
+    # @param results [Array] the array of records/statements to limit
+    # @return [Array] the limited array
+    def apply_limit(results)
+      results.first(@limit)
+    end
+
+    # Applies a count aggregation to grouped statements.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements to group and count
+    # @return [Hash] a hash of groups with their counts
+    def apply_group_count(statements)
+      apply_aggregate(statements) { |group_statements| group_statements.size }
+    end
+
+    # Applies an average aggregation to grouped statements for a given field.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements to group and calculate average on
+    # @param field [Symbol] the field to calculate the average on
+    # @return [Hash] a hash of groups with their average values
+    def apply_group_average(statements, field)
+      apply_aggregate(statements) { |group_statements| apply_average(group_statements, field) }
+    end
+
+    # Aggregates grouped statements using a block to define the aggregation.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements to group and aggregate on
+    # @yield [Array] yields each group of statements to the block
+    # @return [Hash] a hash of groups with aggregated values
+    def apply_aggregate(statements)
+      grouped_results = apply_group(statements)
+
+      results = grouped_results.transform_values do |group_statements|
+        yield(group_statements)
+      end
+
+      # Sort counts by ascending as default
+      results = apply_sort(results, value_extractor: :last) unless @sort_key.nil?
+
+      results = apply_limit(results) unless @limit.nil?
+
+      results.to_h
+    end
+
+    # Computes the average value for a given field in an array of xAPI statements.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements
+    # @param field [Symbol] the field to calculate the average on
+    # @return [Float, nil] the average value or nil if no valid values
+    def apply_average(statements, field)
+      total = 0.0
+
+      statements.each do |statement|
+        value = dig_via_methods(statement, field)
+        total += value unless value.nil?
+      end
+
+      count = statements.count
+
+      count != 0 ? (total / count) : nil
+    end
+
+    # Groups an array of xAPI statements by the @group_by key.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements to group
+    # @return [Hash] a hash with group keys mapping to arrays of statements
+    def apply_group(statements)
+      results = Hash.new { |h, k| h[k] = [] }
+
+      statements.each do |statement|
+        key = dig_via_methods(statement, @group_by)
+        results[key] << statement
+      end
+
+      results
+    end
+
+    # @!endgroup
+
+
+    # Helper for counting statements grouped by a field.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] Array of xAPI statement objects to count
+    # @return [Hash] Hash of grouped counts
+    # def grouped_count(statements)
+    #   counts = {}
+
+    #   statements.each do |statement|
+    #     key = dig_via_methods(statement, @group_by)
+
+    #     if (@group_by.to_s == "timestamp") && @period
+    #       key = format_group_by_timestamp(key, @period)
+    #     end
+
+    #     counts[key] ||= 0
+    #     counts[key] += 1
+    #   end
+
+    #   # Sort counts by ascending as default
+    #   sorted_counts = counts.sort_by(&:last)
+    #   sorted_counts.reverse! if @sort_direction == :desc
+
+    #   sorted_counts = sorted_counts.first(@limit) if @limit
+    #   sorted_counts.to_h
+    # end
   end
 end
