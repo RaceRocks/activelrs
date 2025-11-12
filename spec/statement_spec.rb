@@ -4,19 +4,18 @@ require "date"
 
 RSpec.describe ActiveLrs::Statement do
   include Helpers
-
   describe "Statement query behavior" do
+    let(:statements) do
+      JSON.parse(fixture_contents("cmi5_statements.json")).map do |json|
+        ActiveLrs::Xapi::Statement.new(json)
+      end
+    end
+
+    before do
+      allow(described_class).to receive(:data).and_return(statements)
+    end
+
     context "Query methods" do
-      let(:statements) do
-        JSON.parse(fixture_contents("cmi5_statements.json")).map do |json|
-          ActiveLrs::Xapi::Statement.new(json)
-        end
-      end
-
-      before do
-        allow(described_class).to receive(:data).and_return(statements)
-      end
-
       it "returns all statements with .all" do
         results = ActiveLrs::Statement.all
         expect(results.to_a.size).to eq(5)
@@ -211,9 +210,75 @@ RSpec.describe ActiveLrs::Statement do
           expect(results).to eq({ "Charlie" => 1 })
         end
 
-      it "applies limit after ordering descending" do
-        results = ActiveLrs::Statement.order(count: :desc).limit(1).group("actor.name").count
-        expect(results).to eq({ "Alice" => 3 })
+        it "applies limit after ordering descending" do
+          results = ActiveLrs::Statement.order(count: :desc).limit(1).group("actor.name").count
+          expect(results).to eq({ "Alice" => 3 })
+        end
+      end
+
+      context "Grouped by timestamp counting" do
+        it "groups by day" do
+          results = ActiveLrs::Statement.group("timestamp", period: :day).count
+          expect(results).to eq({ "2025-01-01" => 3, "2025-01-02" => 2, "2025-01-03" => 1 })
+        end
+
+        it "groups by week" do
+          results = ActiveLrs::Statement.group("timestamp", period: :week).count
+          expect(results).to eq({ "2025-W01" => 6 })
+        end
+
+        it "groups by month" do
+          results = ActiveLrs::Statement.group("timestamp", period: :month).count
+          expect(results).to eq({ "2025-01" => 6 })
+        end
+
+        it "filters and groups within a time range" do
+          results = ActiveLrs::Statement.since("2025-01-02T00:00:00Z")
+                                        .group("timestamp", period: :day)
+                                        .count
+          expect(results).to eq({ "2025-01-02" => 2, "2025-01-03" => 1 })
+        end
+
+        it "returns empty results for future-only ranges" do
+          results = ActiveLrs::Statement.since("2030-01-01T00:00:00Z")
+                                        .group("timestamp", period: :day)
+                                        .count
+          expect(results).to eq({})
+        end
+
+        it "groups by day after filtering and ordering" do
+          results = ActiveLrs::Statement.where("actor.name": "Alice")
+                                        .order(timestamp: :asc)
+                                        .group("timestamp", period: :day)
+                                        .count
+          expect(results).to eq({ "2025-01-01" => 2, "2025-01-03" => 1 })
+        end
+
+        it "limits grouped results after ordering descending" do
+          results = ActiveLrs::Statement.group("actor.name")
+                                        .order(count: :desc)
+                                        .limit(2)
+                                        .count
+          expect(results).to eq({ "Alice" => 3, "Bob" => 2 })
+        end
+
+        it "filters, groups by week, and limits results" do
+          results = ActiveLrs::Statement.where("verb.id": "http://adlnet.gov/expapi/verbs/initialized")
+                                        .group("timestamp", period: :week)
+                                        .order(count: :desc)
+                                        .limit(1)
+                                        .count
+          expect(results).to eq({ "2025-W01" => 2 })
+        end
+
+        it "filters by verb and actor, groups by month, and orders ascending" do
+          results = ActiveLrs::Statement.where("actor.name": "Bob")
+                                        .where("verb.id": "http://adlnet.gov/expapi/verbs/completed")
+                                        .group("timestamp", period: :month)
+                                        .order(count: :asc)
+                                        .count
+          expect(results).to eq({ "2025-01" => 1 })
+        end
       end
     end
 
@@ -365,71 +430,6 @@ RSpec.describe ActiveLrs::Statement do
             "http://example.com/activities/course-1" => 83.333
           })
         end
-      end
-    end
-
-    describe "Grouped by timestamp counting" do
-      it "groups by day" do
-        results = ActiveLrs::Statement.group("timestamp", period: :day).count
-        expect(results).to eq({ "2025-01-01" => 3, "2025-01-02" => 2, "2025-01-03" => 1 })
-      end
-
-      it "groups by week" do
-        results = ActiveLrs::Statement.group("timestamp", period: :week).count
-        expect(results).to eq({ "2025-W01" => 6 })
-      end
-
-      it "groups by month" do
-        results = ActiveLrs::Statement.group("timestamp", period: :month).count
-        expect(results).to eq({ "2025-01" => 6 })
-      end
-
-      it "filters and groups within a time range" do
-        results = ActiveLrs::Statement.since("2025-01-02T00:00:00Z")
-                                      .group("timestamp", period: :day)
-                                      .count
-        expect(results).to eq({ "2025-01-02" => 2, "2025-01-03" => 1 })
-      end
-
-      it "returns empty results for future-only ranges" do
-        results = ActiveLrs::Statement.since("2030-01-01T00:00:00Z")
-                                      .group("timestamp", period: :day)
-                                      .count
-        expect(results).to eq({})
-      end
-
-      it "groups by day after filtering and ordering" do
-        results = ActiveLrs::Statement.where("actor.name": "Alice")
-                                      .order(timestamp: :asc)
-                                      .group("timestamp", period: :day)
-                                      .count
-        expect(results).to eq({ "2025-01-01" => 2, "2025-01-03" => 1 })
-      end
-
-      it "limits grouped results after ordering descending" do
-        results = ActiveLrs::Statement.group("actor.name")
-                                      .order(count: :desc)
-                                      .limit(2)
-                                      .count
-        expect(results).to eq({ "Alice" => 3, "Bob" => 2 })
-      end
-
-      it "filters, groups by week, and limits results" do
-        results = ActiveLrs::Statement.where("verb.id": "http://adlnet.gov/expapi/verbs/initialized")
-                                      .group("timestamp", period: :week)
-                                      .order(count: :desc)
-                                      .limit(1)
-                                      .count
-        expect(results).to eq({ "2025-W01" => 2 })
-      end
-
-      it "filters by verb and actor, groups by month, and orders ascending" do
-        results = ActiveLrs::Statement.where("actor.name": "Bob")
-                                      .where("verb.id": "http://adlnet.gov/expapi/verbs/completed")
-                                      .group("timestamp", period: :month)
-                                      .order(count: :asc)
-                                      .count
-        expect(results).to eq({ "2025-01" => 1 })
       end
     end
   end
