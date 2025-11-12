@@ -130,10 +130,19 @@ module ActiveLrs
 
     # Shortcut for 'group' on a new instance.
     #
-    # @param field [String] Field to group by
+    # @param field [String] Field to group by (e.g., "actor.name", or "timestamp")
+    # @param period [Symbol, nil] Optional time period for timestamp grouping
     # @return [ActiveLrs::Statement]
-    def self.group(field)
-      new.group(field)
+    def self.group(field, period: nil)
+      new.group(field, period: period)
+    end
+
+    # Shortcut for 'average' on a new instance.
+    #
+    # @param field [String] Field to calculate average on
+    # @return [ActiveLrs::Statement]
+    def self.average(field)
+      new.average(field)
     end
 
     # Shortcut for 'average' on a new instance.
@@ -156,6 +165,7 @@ module ActiveLrs
       @sort_direction = nil
       @limit = nil
       @group_by = nil
+      @period = nil
     end
 
     # Adds filtering conditions.
@@ -219,10 +229,12 @@ module ActiveLrs
 
     # Groups statements by a specified field.
     #
-    # @param field [String] Field to group by
+    # @param field [String, Symbol] The field name to group by.
+    # @param period [Symbol, nil] Optional time period for timestamp grouping.
     # @return [ActiveLrs::Statement] self
-    def group(field)
+    def group(field, period: nil)
       @group_by = field
+      @period = period
       self
     end
 
@@ -335,6 +347,26 @@ module ActiveLrs
       value.is_a?(Symbol) ? resolve_verb_symbol_to_string_iri(value) : value
     end
 
+    # Helper for formatting timestamps for the grouped_count method.
+    #
+    # @param time [Time] The timestamp to format.
+    # @param period [Symbol] The period to group by. One of `:day`, `:week`, or `:month`.
+    # @return [String, nil] The formatted time string, or nil if input is not a Time.
+    def format_group_by_timestamp(time, period)
+      return nil unless time.is_a?(Time)
+
+      case period
+      when :day
+        time.utc.strftime("%Y-%m-%d")
+      when :week
+        "#{time.utc.strftime('%G')}-W#{time.utc.strftime('%V')}"
+      when :month
+        time.utc.strftime("%Y-%m")
+      else
+        raise ArgumentError, "Unsupported period: #{period.inspect}"
+      end
+    end
+
     # Sorts an array of results by a given key or a custom value extractor.
     #
     # @param results [Array] the array of records/statements to sort
@@ -421,9 +453,10 @@ module ActiveLrs
 
       statements.each do |statement|
         key = dig_via_methods(statement, @group_by)
+        # Format timestamp keys if grouping by time with period
+        key = format_group_by_timestamp(key, @period) if (@group_by.to_s == "timestamp") && @period
         results[key] << statement
       end
-
       results
     end
 
