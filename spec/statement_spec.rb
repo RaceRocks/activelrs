@@ -103,7 +103,7 @@ RSpec.describe ActiveLrs::Statement do
       end
     end
 
-    describe "Aggregation behaviour" do
+    describe "Count Aggregation behaviour" do
       let(:statements) do
         JSON.parse(fixture_contents("cmi5_grouping_test_statements.json")).map do |json|
           ActiveLrs::Xapi::Statement.new(json)
@@ -210,6 +210,157 @@ RSpec.describe ActiveLrs::Statement do
       it "applies limit after ordering descending" do
         results = ActiveLrs::Statement.order(count: :desc).limit(1).group("actor.name").count
         expect(results).to eq({ "Alice" => 3 })
+      end
+    end
+
+    describe "Average Aggregation behaviour" do
+      let(:statements) do
+        JSON.parse(fixture_contents("cmi5_average_test_statements.json")).map do |json|
+          ActiveLrs::Xapi::Statement.new(json)
+        end
+      end
+
+      context "Basic averaging" do
+        it "can average all statements" do
+          results = ActiveLrs::Statement.average("result.score.raw")
+          expect(results.round(3)).to eq(74.800)
+        end
+
+        it "can average simple queries" do
+          results = ActiveLrs::Statement.where("object.id": "http://example.com/activities/quiz-1").average("result.score.raw")
+          expect(results.round(3)).to eq(62.667)
+        end
+
+        it "can average chained queries" do
+          results = ActiveLrs::Statement
+            .where("object.id": "http://example.com/activities/quiz-1")
+            .since("2025-10-03T00:00:00Z")
+            .average("result.score.raw")
+          expect(results.round(3)).to eq(58.000)
+        end
+
+        it "can average statements given multiple conditions" do
+          results = ActiveLrs::Statement
+            .where("object.id": "http://example.com/activities/quiz-1")
+            .where("verb.id": "http://adlnet.gov/expapi/verbs/passed")
+            .average("result.score.raw")
+          expect(results.round(3)).to eq(85.000)
+        end
+
+        it "cannot average empty parameter" do
+          expect do
+            ActiveLrs::Statement
+              .where("object.id": "http://example.com/activities/quiz-1")
+              .average
+          end.to raise_error(ArgumentError)
+        end
+
+        it "would return 0.0 for unknown parameter" do
+          results = ActiveLrs::Statement.average("unknown.parameter")
+          expect(results).to eq(0.0)
+        end
+
+        it "cannot query a averaged query" do
+          expect do
+            ActiveLrs::Statement.where("actor.name": "Alice")
+              .average("unknown.parameter")
+              .where("verb.id": "http://adlnet.gov/expapi/verbs/terminated")
+          end.to raise_error(NoMethodError)
+        end
+      end
+
+      context "Grouped averaging" do
+        it "can group and average all statements" do
+          results = ActiveLrs::Statement
+            .group("object.id")
+            .average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            "http://example.com/activities/quiz-1" => 62.667,
+            "http://example.com/activities/quiz-2" => 73.0,
+            "http://example.com/activities/course-1" => 83.333,
+            "http://example.com/activities/quiz-3" => 91.0
+          })
+        end
+
+        it "can group and average statements from a simple query" do
+          results = ActiveLrs::Statement
+            .where("object.id": "http://example.com/activities/quiz-1")
+            .group("verb.id")
+            .average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            "http://adlnet.gov/expapi/verbs/passed" => 85.0,
+            "http://adlnet.gov/expapi/verbs/failed" => 45.0,
+            "http://adlnet.gov/expapi/verbs/attempted" => 58.0
+          })
+        end
+
+        it "can group and average statements from a chained query with multiple conditions" do
+          results = ActiveLrs::Statement
+            .where("object.id": "http://example.com/activities/quiz-1")
+            .since("2025-10-03T00:00:00Z")
+            .group("verb.id")
+            .average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, { "http://adlnet.gov/expapi/verbs/attempted" => 58.0 })
+        end
+
+        it "averages nil for a completely missing field" do
+          results = ActiveLrs::Statement.group("nonexistent.field").average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, { nil => 74.800 })
+        end
+
+        it "averages statements with partially missing fields" do
+          results = ActiveLrs::Statement
+            .where("object.id": "http://example.com/activities/quiz-1")
+            .group("verb.display")
+            .average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            { "en-US" => "passed" } => 85.0,
+            { "en-US" => "failed" } => 45.0,
+            nil => 58.0 })
+        end
+
+        it "orders grouped results ascending by average" do
+          results = ActiveLrs::Statement.order(average: :asc).group("object.id").average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            "http://example.com/activities/quiz-1" => 62.667,
+            "http://example.com/activities/quiz-2" => 73.0,
+            "http://example.com/activities/course-1" => 83.333,
+            "http://example.com/activities/quiz-3" => 91.0
+          })
+        end
+
+        it "order grouped results descending by average" do
+          results = ActiveLrs::Statement.order(average: :desc).group("object.id").average("result.score.raw")
+          expect_hash_with_rounded_values(results, {
+            "http://example.com/activities/quiz-3" => 91.0,
+            "http://example.com/activities/course-1" => 83.333,
+            "http://example.com/activities/quiz-2" => 73.0,
+            "http://example.com/activities/quiz-1" => 62.667
+          })
+        end
+
+        it "applies limit after ordering ascending" do
+          results = ActiveLrs::Statement.order(average: :asc).limit(1).group("object.id").average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            "http://example.com/activities/quiz-1" => 62.667
+          })
+        end
+
+        it "applies limit after ordering descending" do
+          results = ActiveLrs::Statement.order(average: :desc).limit(2).group("object.id").average("result.score.raw")
+
+          expect_hash_with_rounded_values(results, {
+            "http://example.com/activities/quiz-3" => 91.0,
+            "http://example.com/activities/course-1" => 83.333
+          })
+        end
       end
     end
   end
