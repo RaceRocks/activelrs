@@ -268,27 +268,6 @@ module ActiveLrs
 
     private
 
-
-    # Helper for formatting timestamps for the grouped_count method.
-    #
-    # @param time [Time] The timestamp to format.
-    # @param period [Symbol] The period to group by. One of `:day`, `:week`, or `:month`.
-    # @return [String, nil] The formatted time string, or nil if input is not a Time.
-    def format_group_by_timestamp(time, period)
-      return nil unless time.is_a?(Time)
-
-      case period
-      when :day
-        time.utc.strftime("%Y-%m-%d")
-      when :week
-        "#{time.utc.strftime('%G')}-W#{time.utc.strftime('%V')}"
-      when :month
-        time.utc.strftime("%Y-%m")
-      else
-        raise ArgumentError, "Unsupported period: #{period.inspect}"
-      end
-    end
-
     # Helper to dig into nested attributes using method chains.
     #
     # @param object [Object] The object to dig into
@@ -366,6 +345,26 @@ module ActiveLrs
     # @return [Object] the resolved value
     def resolve_value(key, value)
       value.is_a?(Symbol) ? resolve_verb_symbol_to_string_iri(value) : value
+    end
+
+    # Helper for formatting timestamps for the grouped_count method.
+    #
+    # @param time [Time] The timestamp to format.
+    # @param period [Symbol] The period to group by. One of `:day`, `:week`, or `:month`.
+    # @return [String, nil] The formatted time string, or nil if input is not a Time.
+    def format_group_by_timestamp(time, period)
+      return nil unless time.is_a?(Time)
+
+      case period
+      when :day
+        time.utc.strftime("%Y-%m-%d")
+      when :week
+        "#{time.utc.strftime('%G')}-W#{time.utc.strftime('%V')}"
+      when :month
+        time.utc.strftime("%Y-%m")
+      else
+        raise ArgumentError, "Unsupported period: #{period.inspect}"
+      end
     end
 
     # Sorts an array of results by a given key or a custom value extractor.
@@ -454,39 +453,13 @@ module ActiveLrs
 
       statements.each do |statement|
         key = dig_via_methods(statement, @group_by)
+        # Format timestamp keys if grouping by time with period
+        key = format_group_by_timestamp(key, @period) if (@group_by.to_s == "timestamp") && @period
         results[key] << statement
       end
-
       results
     end
 
     # @!endgroup
-
-
-    # Helper for counting statements grouped by a field.
-    #
-    # @param statements [Array<ActiveLrs::Xapi::Statement>] Array of xAPI statement objects to count
-    # @return [Hash] Hash of grouped counts
-    # def grouped_count(statements)
-    #   counts = {}
-
-    #   statements.each do |statement|
-    #     key = dig_via_methods(statement, @group_by)
-
-    #     if (@group_by.to_s == "timestamp") && @period
-    #       key = format_group_by_timestamp(key, @period)
-    #     end
-
-    #     counts[key] ||= 0
-    #     counts[key] += 1
-    #   end
-
-    #   # Sort counts by ascending as default
-    #   sorted_counts = counts.sort_by(&:last)
-    #   sorted_counts.reverse! if @sort_direction == :desc
-
-    #   sorted_counts = sorted_counts.first(@limit) if @limit
-    #   sorted_counts.to_h
-    # end
   end
 end
