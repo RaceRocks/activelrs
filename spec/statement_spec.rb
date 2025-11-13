@@ -416,6 +416,98 @@ RSpec.describe ActiveLrs::Statement do
         end
       end
     end
+
+    describe "Distinct selection behaviour" do
+      let(:statements) do
+        JSON.parse(fixture_contents("cmi5_grouping_test_statements.json")).map do |json|
+          ActiveLrs::Xapi::Statement.new(json)
+        end
+      end
+
+      before do
+        allow(described_class).to receive(:data).and_return(statements)
+      end
+
+      context "Basic distinct selection" do
+        it "returns nothing if the attribute does not exist" do
+          results = ActiveLrs::Statement.select("nonexistent.field").to_a
+          expect(results).to eq([])
+        end
+
+        it "returns all actor names" do
+          results = ActiveLrs::Statement.select("actor.name").to_a
+          expect(results).to eq(["Alice", "Bob", "Alice", "Charlie", "Alice", "Bob"])
+        end
+
+        it "returns distinct actor names" do
+          results = ActiveLrs::Statement.select("actor.name").distinct.to_a
+          expect(results).to eq(["Alice", "Bob", "Charlie"])
+        end
+      end
+
+      context "Distinct select chaining" do
+        it "returns distinct filtered actors" do
+          results = ActiveLrs::Statement.where("actor.name": "Alice").select("actor.name").distinct.to_a
+          expect(results).to eq(["Alice"])
+        end
+
+        it "orders distinct results alphabetically ascending" do
+          results = ActiveLrs::Statement.select("actor.name").distinct.order("actor.name": :asc).to_a
+          expect(results).to eq(["Alice", "Bob", "Charlie"])
+        end
+
+        it "orders distinct results alphabetically descending" do
+          results = ActiveLrs::Statement.select("actor.name").distinct.order("actor.name": :desc).to_a
+          expect(results).to eq(["Charlie", "Bob", "Alice"])
+        end
+      end
+
+      context "Distinct selection with grouping and counting" do
+        it "groups by course ID and counts distinct verbs" do
+          results = ActiveLrs::Statement.group("object.id").select("verb.id").distinct.count
+          puts("groups by course ID and counts distinct verbs: #{results.inspect}")
+          expect(results).to eq({
+            "http://example.org/courses/math101" => 3,
+            "http://example.org/courses/science201" => 2
+          })
+        end
+
+        it "groups by course ID and counts distinct actors" do
+          results = ActiveLrs::Statement.group("object.id").select("actor.name").distinct.count
+          puts("groups by course ID and counts distinct actors: #{results.inspect}") 
+          expect(results).to eq({
+            "http://example.org/courses/math101" => 2,
+            "http://example.org/courses/science201" => 2
+          })
+        end
+
+        it "groups by timestamp day and counts distinct verbs" do
+          results = ActiveLrs::Statement.group("timestamp", period: :day).select("verb.id").distinct.count
+          puts("groups by timestamp day and counts distinct verbs: #{results.inspect}")
+          expect(results).to eq({
+            "2025-01-01" => 2,
+            "2025-01-02" => 2,
+            "2025-01-03" => 1
+          })
+        end
+
+        it "groups by timestamp week and counts distinct actors" do
+          results = ActiveLrs::Statement.group("timestamp", period: :week).select("actor.name").distinct.count
+          puts("groups by timestamp week and counts distinct actors: #{results.inspect}")
+          expect(results).to eq({
+            "2025-W01" => 3
+          })
+        end
+
+        it "groups by timestamp month and counts distinct actors" do
+          results = ActiveLrs::Statement.group("timestamp", period: :month).select("actor.name").distinct.count
+          puts("groups by timestamp month and counts distinct actors: #{results.inspect}")
+          expect(results).to eq({
+            "2025-01" => 3
+          })
+        end
+      end
+    end
   end
 
   describe "Fetch localized value behaviour" do
