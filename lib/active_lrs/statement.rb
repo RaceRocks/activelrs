@@ -22,6 +22,7 @@ module ActiveLrs
   #                  .to_a
   class Statement
     include Enumerable
+    include ActiveLrs::Xapi::LocalizationHelper
 
     # @!group Class Methods
 
@@ -145,12 +146,15 @@ module ActiveLrs
       new.average(field)
     end
 
-    # Shortcut for 'average' on a new instance.
+    # Shortcut for 'fetch_localized_value' on a new instance.
     #
-    # @param field [String] Field to calculate average on
-    # @return [ActiveLrs::Statement]
-    def self.average(field)
-      new.average(field)
+    # @param match_attribute_path [String, Symbol] The path to the attribute used to find the statement (e.g., "verb.id" or "object.id").
+    # @param match_value [String] The value to match against the attribute (e.g., "http://adlnet.gov/expapi/verbs/completed").
+    # @param target_attribute [String, Symbol] The attribute path for which to fetch the localized value (e.g., "verb.display" or "object.definition.name").
+    # @param locale [String, Symbol, nil] Optional locale to use (defaults to I18n.locale).
+    # @return [String] The localized value, or nil if no statement or attribute value is found.
+    def self.fetch_localized_value(match_attribute_path, match_value, target_attribute, locale = nil)
+      new.fetch_localized_value(match_attribute_path, match_value, target_attribute, locale)
     end
 
     # @!endgroup
@@ -264,6 +268,30 @@ module ActiveLrs
       end
 
       results
+    end
+
+    # Fetches the localized value of a given xAPI attribute for the latest statement
+    # matching a specified attribute value.
+    #
+    # @param match_attribute_path [String, Symbol] The path to the attribute used to find the statement (e.g., "verb.id" or "object.id").
+    # @param match_value [String] The value to match against the attribute (e.g., "http://adlnet.gov/expapi/verbs/completed").
+    # @param target_attribute [String, Symbol] The attribute path for which to fetch the localized value (e.g., "verb.display" or "object.definition.name").
+    # @param locale [String, Symbol, nil] Optional locale to use (defaults to I18n.locale).
+    # @return [String] The localized value, or nil if no statement or attribute value is found.
+    def fetch_localized_value(match_attribute_path, match_value, target_attribute, locale = nil)
+      # Filter statements that match the given attribute value
+      filtered = self.class.data.select { |stmt| dig_via_methods(stmt, match_attribute_path) == match_value }
+
+      return nil if filtered.empty?
+
+      # Pick the latest statement by timestamp
+      latest = filtered.max_by { |stmt| dig_via_methods(stmt, "timestamp") || Time.at(0) }
+
+      # Dig the language map from the target attribute
+      lang_map = dig_via_methods(latest, target_attribute)
+
+      # Return localized value using helper, or nil if not found
+      lang_map ? get_localized_value(lang_map, locale) : nil
     end
 
     private

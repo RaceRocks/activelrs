@@ -13,6 +13,8 @@ module ActiveLrs
     #   Section "Interaction Components" of the "Interaction Activities" Table — describes
     #   required/optional properties of interaction components
     class InteractionComponent
+      include LocalizationHelper
+
       # @return [String] The identifier for this component (required).
       attr_accessor :id
 
@@ -49,6 +51,14 @@ module ActiveLrs
         node["id"] = id if id
         node["description"] = description if description
         node
+      end
+
+      # Returns the localized description of the interaction component.
+      #
+      # @param locale [String, Symbol, nil] Optional locale to use. Defaults to nil (will use configured defaults).
+      # @return [String] The localized description, or "undefined" if not available.
+      def localize_description(locale: nil)
+        get_localized_value(description, locale)
       end
     end
   end

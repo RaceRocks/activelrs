@@ -58,5 +58,7 @@ module ActiveLrs
     autoload :Statement, "active_lrs/xapi/statement"
     autoload :SubStatement, "active_lrs/xapi/sub_statement"
     autoload :Verb, "active_lrs/xapi/verb"
+
+    autoload :LocalizationHelper, "active_lrs/xapi/localization_helper"
   end
 end

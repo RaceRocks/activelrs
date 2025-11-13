@@ -14,6 +14,8 @@ module ActiveLrs
     #
     # @see https://opensource.ieee.org/xapi/xapi-base-standard-documentation/-/blob/main/9274.1.1%20xAPI%20Base%20Standard%20for%20LRSs.md#4237-attachments
     class Attachment
+      include LocalizationHelper
+
       # @return [String, nil] An IRI indicating the intended use of this Attachment
       #   (e.g., "http://id.tincanapi.com/attachment/supporting_media").
       attr_accessor :usage_type
@@ -95,6 +97,22 @@ module ActiveLrs
         node["sha2"] = sha2 if sha2
         node["fileUrl"] = file_url if file_url
         node
+      end
+
+      # Returns the localized display of the attachment.
+      #
+      # @param locale [String, Symbol, nil] Optional locale to use. Defaults to nil (will use configured defaults).
+      # @return [String] The localized display, or "undefined" if not available.
+      def localize_display(locale: nil)
+        get_localized_value(display, locale)
+      end
+
+      # Returns the localized description of the attachment.
+      #
+      # @param locale [String, Symbol, nil] Optional locale to use. Defaults to nil (will use configured defaults).
+      # @return [String] The localized description, or "undefined" if not available.
+      def localize_description(locale: nil)
+        get_localized_value(description, locale)
       end
     end
   end
