@@ -423,35 +423,35 @@ RSpec.describe ActiveLrs::Statement do
 
     context "when fetching localized values" do
       it "returns the localized value for a given locale" do
-        value = ActiveLrs::Statement.new.fetch_localized_value(
+        value = ActiveLrs::Statement.fetch_localized_value(
           "object.id", "http://example.com/activities/math", "object.definition.name", "fr-FR"
         )
         expect(value).to eq("Mathématiques")
       end
 
       it "returns the localized value for a given base language" do
-        value = ActiveLrs::Statement.new.fetch_localized_value(
+        value = ActiveLrs::Statement.fetch_localized_value(
           "object.id", "http://example.com/activities/math", "object.definition.name"
         )
         expect(value).to eq("Math")
       end
 
       it "returns the first available value if locale is not provided" do
-        value = ActiveLrs::Statement.new.fetch_localized_value(
+        value = ActiveLrs::Statement.fetch_localized_value(
           "actor.name", "Alice", "object.definition.name"
         )
         expect(value).to eq("Science")
       end
 
       it "returns 'undefined' when no matching statement is found" do
-        value = ActiveLrs::Statement.new.fetch_localized_value(
+        value = ActiveLrs::Statement.fetch_localized_value(
           "actor.name", "Charlie", "object.definition.name", "en-US"
         )
         expect(value).to eq("undefined")
       end
 
       it "returns 'undefined' when the target attribute is missing" do
-        value = ActiveLrs::Statement.new.fetch_localized_value(
+        value = ActiveLrs::Statement.fetch_localized_value(
           "actor.name", "Bob", "object.definition.description", "en-US"
         )
         expect(value).to eq("undefined")
