@@ -136,12 +136,11 @@ This project is actively maintained by the **Racerocks Core Engineering Team**, 
 
 These are the **trusted architects and developers** who collaboratively drive the vision, manage the repository, and ensure the quality and stability of `activelrs`. They represent our unified expertise in modern learning data systems.
 
-| Name | Role / Focus Area | GitHub Profile | Company Title |
-| :--- | :--- | :--- | :--- |
-| **Amie Walton** | Architect & Standards Lead (TLA/IEEE) | [@AmieAtRR](https://github.com/AmieAtRR) | VP of Technology |
-| **Justin Granofsky** | Core Maintainer / Contributor | [@justinGranof](https://github.com/justinGranof) | Full Stack Developer |
-| **Ira Susanto** | Core Maintainer / Contributor | [@ira-susanto](https://github.com/ira-susanto) | Full Stack Developer |
-| **Sam Foran** | Core Maintainer / Contributor  | [@s-foran](https://github.com/s-foran) | Full Stack Developer |
+| Name            | Role / Focus Area                     | GitHub Profile                                 | Company Title        |
+| :-------------- | :------------------------------------ | :--------------------------------------------- | :------------------- |
+| **Amie Walton** | Architect & Standards Lead (TLA/IEEE) | [@AmieAtRR](https://github.com/AmieAtRR)       | VP of Technology     |
+| **Ira Susanto** | Core Maintainer / Contributor         | [@ira-susanto](https://github.com/ira-susanto) | Full Stack Developer |
+| **Sam Foran**   | Core Maintainer / Contributor         | [@s-foran](https://github.com/s-foran)         | Full Stack Developer |
 
 ---
 

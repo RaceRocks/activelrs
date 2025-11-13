@@ -2,6 +2,10 @@
 
 module ActiveLrs
   module Xapi
+    # Helper methods for resolving localized strings from xAPI statements.
+    #
+    # Provides functionality to select the most appropriate value from
+    # a language map, following xAPI spec conventions and fallbacks.
     module LocalizationHelper
       # Resolve the most appropriate localized string from a language map (per xAPI spec),
       # following a series of fallbacks.
@@ -15,7 +19,7 @@ module ActiveLrs
       #
       # If no match is found, returns the string `"undefined"`.
       #
-      # @param lang_map [Hash] The language map from an xAPI statement (e.g. {"en-US" => "Terminated"})
+      # @param lang_map [Hash] The language map from an xAPI statement (e.g. `{ "en-US" => "Terminated" }`)
       # @param locale [String, Symbol, nil] The preferred locale (defaults to ActiveLrs.configuration.default_locale
       #   or I18n.locale if available)
       # @return [String] The resolved localized value, or `"undefined"` if no valid entry exists.
