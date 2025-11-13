@@ -30,7 +30,7 @@ module ActiveLrs
       #   get_localized_value(lang_map, "es")    # => "Hello" (fallback)
       #   get_localized_value({}, "en")          # => "undefined"
       def get_localized_value(lang_map, locale = nil)
-        return "undefined" unless lang_map.is_a?(Hash) && lang_map.any?
+        return nil unless lang_map.is_a?(Hash) && lang_map.any?
 
         # Determine locale in safe order
         locale ||= ActiveLrs.configuration.default_locale || (defined?(I18n) && I18n.locale)
@@ -54,7 +54,7 @@ module ActiveLrs
         end
 
         # Fallback to first available value
-        lang_map.values.first || "undefined"
+        lang_map.values.first || nil
       end
 
       private

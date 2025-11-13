@@ -152,7 +152,7 @@ module ActiveLrs
     # @param match_value [String] The value to match against the attribute (e.g., "http://adlnet.gov/expapi/verbs/completed").
     # @param target_attribute [String, Symbol] The attribute path for which to fetch the localized value (e.g., "verb.display" or "object.definition.name").
     # @param locale [String, Symbol, nil] Optional locale to use (defaults to I18n.locale).
-    # @return [String] The localized value, or "undefined" if no statement or attribute value is found.
+    # @return [String] The localized value, or nil if no statement or attribute value is found.
     def self.fetch_localized_value(match_attribute_path, match_value, target_attribute, locale = nil)
       new.fetch_localized_value(match_attribute_path, match_value, target_attribute, locale)
     end
@@ -277,12 +277,12 @@ module ActiveLrs
     # @param match_value [String] The value to match against the attribute (e.g., "http://adlnet.gov/expapi/verbs/completed").
     # @param target_attribute [String, Symbol] The attribute path for which to fetch the localized value (e.g., "verb.display" or "object.definition.name").
     # @param locale [String, Symbol, nil] Optional locale to use (defaults to I18n.locale).
-    # @return [String] The localized value, or "undefined" if no statement or attribute value is found.
+    # @return [String] The localized value, or nil if no statement or attribute value is found.
     def fetch_localized_value(match_attribute_path, match_value, target_attribute, locale = nil)
       # Filter statements that match the given attribute value
       filtered = self.class.data.select { |stmt| dig_via_methods(stmt, match_attribute_path) == match_value }
 
-      return "undefined" if filtered.empty?
+      return nil if filtered.empty?
 
       # Pick the latest statement by timestamp
       latest = filtered.max_by { |stmt| dig_via_methods(stmt, "timestamp") || Time.at(0) }
@@ -290,8 +290,8 @@ module ActiveLrs
       # Dig the language map from the target attribute
       lang_map = dig_via_methods(latest, target_attribute)
 
-      # Return localized value using helper, or "undefined" if not found
-      lang_map ? get_localized_value(lang_map, locale) : "undefined"
+      # Return localized value using helper, or nil if not found
+      lang_map ? get_localized_value(lang_map, locale) : nil
     end
 
     private

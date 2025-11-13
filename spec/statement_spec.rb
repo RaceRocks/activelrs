@@ -443,18 +443,18 @@ RSpec.describe ActiveLrs::Statement do
         expect(value).to eq("Science")
       end
 
-      it "returns 'undefined' when no matching statement is found" do
+      it "returns nil when no matching statement is found" do
         value = ActiveLrs::Statement.fetch_localized_value(
           "actor.name", "Charlie", "object.definition.name", "en-US"
         )
-        expect(value).to eq("undefined")
+        expect(value).to eq(nil)
       end
 
-      it "returns 'undefined' when the target attribute is missing" do
+      it "returns nil when the target attribute is missing" do
         value = ActiveLrs::Statement.fetch_localized_value(
           "actor.name", "Bob", "object.definition.description", "en-US"
         )
-        expect(value).to eq("undefined")
+        expect(value).to eq(nil)
       end
     end
   end

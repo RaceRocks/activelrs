@@ -56,13 +56,13 @@ RSpec.describe ActiveLrs::Xapi::LocalizationHelper do
       end
     end
 
-    context "when lang_map is nil or empty" do
-      it "returns 'undefined' for nil" do
-        expect(helper.get_localized_value(nil, "en")).to eq("undefined")
+    context "when lang_map is missing or empty" do
+      it "returns nil for missing lang_map" do
+        expect(helper.get_localized_value(nil, "en")).to eq(nil)
       end
 
-      it "returns 'undefined' for empty hash" do
-        expect(helper.get_localized_value({}, "en")).to eq("undefined")
+      it "returns nil for empty hash" do
+        expect(helper.get_localized_value({}, "en")).to eq(nil)
       end
     end
 
