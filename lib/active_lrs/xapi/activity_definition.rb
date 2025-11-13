@@ -11,6 +11,8 @@ module ActiveLrs
     # @see https://opensource.ieee.org/xapi/xapi-base-standard-documentation/-/blob/main/9274.1.1%20xAPI%20Base%20Standard%20for%20LRSs.md#4223-object
     #   Section 4.2.2.3 "Object" — see the "Activity Definition" subsection
     class ActivityDefinition
+      include LocalizationHelper
+
       # @return [Hash{String => String}, nil] Language map for the activity's name.
       attr_accessor :name
 
@@ -140,6 +142,22 @@ module ActiveLrs
         end
 
         node
+      end
+
+      # Returns the localized name of the activity.
+      #
+      # @param locale [String, Symbol, nil] Optional locale to use. Defaults to nil (will use configured defaults).
+      # @return [String] The localized name, or "undefined" if not available.
+      def localize_name(locale: nil)
+        get_localized_value(name, locale)
+      end
+
+      # Returns the localized description of the activity.
+      #
+      # @param locale [String, Symbol, nil] Optional locale to use. Defaults to nil (will use configured defaults).
+      # @return [String] The localized description, or "undefined" if not available.
+      def localize_description(locale: nil)
+        get_localized_value(description, locale)
       end
     end
   end

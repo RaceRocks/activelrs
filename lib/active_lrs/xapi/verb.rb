@@ -10,6 +10,8 @@ module ActiveLrs
     #
     # @see https://opensource.ieee.org/xapi/xapi-base-standard-documentation/-/blob/main/9274.1.1%20xAPI%20Base%20Standard%20for%20LRSs.md#4222-verb
     class Verb
+      include LocalizationHelper
+
       # @return [String] IRI that uniquely identifies the verb
       attr_accessor :id
 
@@ -55,6 +57,14 @@ module ActiveLrs
         node["id"] = id.to_s if id
         node["display"] = display if display
         node
+      end
+
+      # Returns the localized display of the verb.
+      #
+      # @param locale [String, Symbol, nil] Optional locale to use. Defaults to nil (will use configured defaults).
+      # @return [String] The localized display, or "undefined" if not available.
+      def localize_display(locale: nil)
+        get_localized_value(display, locale)
       end
     end
   end

@@ -1,0 +1,64 @@
+[
+  {
+    "id": "1",
+    "actor": {
+      "objectType": "Agent",
+      "name": "Alice",
+      "mbox": "mailto:alice@example.com"
+    },
+    "verb": {
+      "id": "http://adlnet.gov/expapi/verbs/initialized"
+    },
+    "object": {
+      "id": "http://example.com/activities/math",
+      "objectType": "Activity",
+      "definition": {
+        "name": {
+          "en-US": "Math",
+          "fr-FR": "Mathématiques"
+        }
+      }
+    },
+    "timestamp": "2025-01-01T10:00:00Z"
+  },
+  {
+    "id": "2",
+    "actor": {
+      "objectType": "Agent",
+      "name": "Alice",
+      "mbox": "mailto:alice@example.com"
+    },
+    "verb": {
+      "id": "http://adlnet.gov/expapi/verbs/initialized"
+    },
+    "object": {
+      "id": "http://example.com/activities/science",
+      "objectType": "Activity",
+      "definition": {
+        "name": {
+          "en-US": "Science"
+        }
+      }
+    },
+    "timestamp": "2025-01-02T10:00:00Z"
+  },
+  {
+    "id": "3",
+    "actor": {
+      "objectType": "Agent",
+      "name": "Bob",
+      "mbox": "mailto:bob@example.com"
+    },
+    "verb": {
+      "id": "http://adlnet.gov/expapi/verbs/initialized"
+    },
+    "object": {
+      "id": "http://example.com/activities/history",
+      "objectType": "Activity",
+      "definition": {
+        "name": null
+      }
+    },
+    "timestamp": "2025-01-03T10:00:00Z"
+  }
+]
