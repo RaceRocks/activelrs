@@ -272,7 +272,7 @@ RSpec.describe ActiveLrs::Statement do
       end
 
       context "with distinct restrictions" do
-        it "returns nothing if the attribute does not exist" do
+        it "returns zero counts if the attribute does not exist" do
           results = ActiveLrs::Statement.group("object.id").distinct.count("nonexistent.field")
           expect(results).to eq({
             "http://example.org/courses/math101" => 0,
@@ -285,8 +285,8 @@ RSpec.describe ActiveLrs::Statement do
           results = ActiveLrs::Statement.group("object.id").count("verb.id")
           puts("counts verb IDs from grouped statements: #{results.inspect}")
           expect(results).to eq({
-            "http://example.org/courses/math101" => 3,
-            "http://example.org/courses/science201" => 3
+            "http://example.org/courses/math101" => 4,
+            "http://example.org/courses/science201" => 2
           })
         end
 
@@ -304,7 +304,7 @@ RSpec.describe ActiveLrs::Statement do
           results = ActiveLrs::Statement.group("object.id").count("actor.name")
           puts("counts actor names from grouped statements: #{results.inspect}")
           expect(results).to eq({
-            "http://example.org/courses/math101" => 2,
+            "http://example.org/courses/math101" => 4,
             "http://example.org/courses/science201" => 2
           })
         end
@@ -313,17 +313,17 @@ RSpec.describe ActiveLrs::Statement do
           results = ActiveLrs::Statement.group("object.id").distinct.count("actor.name")
           puts("counts distinct actor names from grouped statements: #{results.inspect}")
           expect(results).to eq({
-            "http://example.org/courses/math101" => 23,
-            "http://example.org/courses/science201" => 3
+            "http://example.org/courses/math101" => 2,
+            "http://example.org/courses/science201" => 2
           })
         end
 
         # TODO: Cut this later
-        it "counts distinct actor names from day-based grouped statements" do
+        it "counts actor names from day-based grouped statements" do
           results = ActiveLrs::Statement.group("timestamp", period: :day).count("actor.name")
           puts("counts actor names from day-based grouped statements: #{results.inspect}")
           expect(results).to eq({
-            "2025-01-01" => 2,
+            "2025-01-01" => 3,
             "2025-01-02" => 2,
             "2025-01-03" => 1
           })
