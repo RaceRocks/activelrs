@@ -119,14 +119,10 @@ module ActiveLrs
 
     # Shortcut for 'count' on a new instance.
     #
-    # @param conditions [Hash] Filtering conditions
-    # @return [Integer]
-    def self.count(conditions = {})
-      if conditions.empty?
-        new.count
-      else
-        new.where(conditions).count
-      end
+    # @param field [String, Symbol, nil] Field to count (optional). Defaults to :id
+    # @return [Integer, Hash]
+    def self.count(field = :id)
+      new.count(field)
     end
 
     # Shortcut for 'group' on a new instance.
@@ -144,6 +140,13 @@ module ActiveLrs
     # @return [ActiveLrs::Statement]
     def self.average(field)
       new.average(field)
+    end
+
+    # Shortcut for 'distinct' on a new instance.
+    #
+    # @return [ActiveLrs::Statement]
+    def self.distinct
+      new.distinct
     end
 
     # Shortcut for 'fetch_localized_value' on a new instance.
@@ -170,6 +173,8 @@ module ActiveLrs
       @limit = nil
       @group_by = nil
       @period = nil
+      @count = nil
+      @distinct = nil
     end
 
     # Adds filtering conditions.
@@ -209,17 +214,22 @@ module ActiveLrs
       self
     end
 
-    # Counts statements, optionally applying additional conditions.
+    # Counts statements, optionally applying a field to count.
     #
-    # @param conditions [Hash] Additional filtering conditions (optional)
+    # @param field [String, Symbol, nil] Field to count (optional). Defaults to :id
     # @return [Integer, Hash] Returns an integer if no grouping is applied, or a hash if grouped
-    def count(conditions = {})
-      return where(conditions).count unless conditions.empty?
+    def count(field = :id)
+      @count = field
 
       results = to_a
-      return results.size unless @group_by
 
-      apply_group_count(results)
+      if @group_by.nil? && @distinct.nil? && @count == :id
+        results.size
+      elsif @group_by.nil?
+        filter_statements_to_count(results).size
+      else
+        apply_group_count(results)
+      end
     end
 
     # Calculate the average value of the specified field from statements.
@@ -239,6 +249,12 @@ module ActiveLrs
     def group(field, period: nil)
       @group_by = field
       @period = period
+      self
+    end
+
+    # Enables distinct counting when performing `count`
+    def distinct
+      @distinct = true
       self
     end
 
@@ -472,7 +488,7 @@ module ActiveLrs
       count != 0 ? (total / count) : nil
     end
 
-    # Groups an array of xAPI statements by the @group_by key.
+    # Groups an array of xAPI statements by the @group_by key, also filters statements before performing aggregation.
     #
     # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements to group
     # @return [Hash] a hash with group keys mapping to arrays of statements
@@ -485,9 +501,35 @@ module ActiveLrs
         key = format_group_by_timestamp(key, @period) if (@group_by.to_s == "timestamp") && @period
         results[key] << statement
       end
+
+      # Apply distinct filtering within each group
+      results = apply_count_filters(results)
       results
     end
 
+    # Applies distinct filtering to each group of statements in a hash.
+    #
+    # @param statement_hash [Hash<String, Array<ActiveLrs::Xapi::Statement>>] the hash of grouped xAPI statements
+    # @return [Hash] the same hash structure but with filtered xAPI statements
+    def apply_count_filters(statement_hash)
+      statement_hash.transform_values { |statements| filter_statements_to_count(statements) }
+    end
+
+    # Helper to filter statements within an array based on distinct-counting rules.
+    # Only the first occurrence of each unique @count value is kept if @distinct is true, returns all if false.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] an array of xAPI statements
+    # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
+    def filter_statements_to_count(statements)
+      seen = {}
+      statements.each_with_object([]) do |statement, selected_statements|
+        current_value = dig_via_methods(statement, @count)
+        next if current_value.nil?
+        next if @distinct && seen.key?(current_value)
+        seen[current_value] = true
+        selected_statements << statement
+      end
+    end
     # @!endgroup
   end
 end

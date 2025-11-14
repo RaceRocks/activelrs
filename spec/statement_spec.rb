@@ -104,6 +104,26 @@ RSpec.describe ActiveLrs::Statement do
         expect(results).to eq(6)
       end
 
+      it "counts all distinct statements" do
+        results = ActiveLrs::Statement.distinct.count
+        expect(results).to eq(6)
+      end
+
+      it "counts a specified field" do
+        results = ActiveLrs::Statement.count("actor.name")
+        expect(results).to eq(6)
+      end
+
+      it "counts distinct values in a specified field" do
+        results = ActiveLrs::Statement.distinct.count("actor.name")
+        expect(results).to eq(3)
+      end
+
+      it "returns 0 if the specified field does not exist" do
+        results = ActiveLrs::Statement.count("nonexistent.field")
+        expect(results).to eq(0)
+      end
+
       it "counts simple queries" do
         results = ActiveLrs::Statement.where("actor.name": "Alice").count
         expect(results).to eq(3)
@@ -114,16 +134,6 @@ RSpec.describe ActiveLrs::Statement do
                                       .since("2025-01-01T10:00:00Z")
                                       .count
         expect(results).to eq(2)
-      end
-
-      it "counts with single filter" do
-        results = ActiveLrs::Statement.count("actor.name": "Bob")
-        expect(results).to eq(2)
-      end
-
-      it "counts with multiple filtering" do
-        results = ActiveLrs::Statement.count("actor.name": "Bob", "verb.id": "http://adlnet.gov/expapi/verbs/completed")
-        expect(results).to eq(1)
       end
 
       it "raises error when chaining after count" do
@@ -146,11 +156,6 @@ RSpec.describe ActiveLrs::Statement do
                                       .group("actor.name")
                                       .count
         expect(results).to eq({ "Alice" => 1, "Bob" => 1 })
-      end
-
-      it "groups and counts via count filters" do
-        results = ActiveLrs::Statement.group("actor.name").count("verb.id": "http://adlnet.gov/expapi/verbs/completed")
-        expect(results).to eq({ "Bob" => 1 })
       end
 
       it "groups and counts with chained query" do
@@ -264,6 +269,55 @@ RSpec.describe ActiveLrs::Statement do
                                         .order(count: :asc)
                                         .count
           expect(results).to eq({ "2025-01" => 1 })
+        end
+      end
+
+      context "with distinct restrictions" do
+        it "returns zero counts if the attribute does not exist" do
+          results = ActiveLrs::Statement.group("object.id").distinct.count("nonexistent.field")
+          expect(results).to eq({
+            "http://example.org/courses/math101" => 0,
+            "http://example.org/courses/science201" => 0
+          })
+        end
+
+        it "counts distinct verb IDs from grouped statements" do
+          results = ActiveLrs::Statement.group("object.id").distinct.count("verb.id")
+          expect(results).to eq({
+            "http://example.org/courses/math101" => 3,
+            "http://example.org/courses/science201" => 2
+          })
+        end
+
+        it "counts distinct actor names from grouped statements" do
+          results = ActiveLrs::Statement.group("object.id").distinct.count("actor.name")
+          expect(results).to eq({
+            "http://example.org/courses/math101" => 2,
+            "http://example.org/courses/science201" => 2
+          })
+        end
+
+        it "counts distinct actor names from day-based grouped statements" do
+          results = ActiveLrs::Statement.group("timestamp", period: :day).distinct.count("actor.name")
+          expect(results).to eq({
+            "2025-01-01" => 2,
+            "2025-01-02" => 2,
+            "2025-01-03" => 1
+          })
+        end
+
+        it "counts distinct actor names from week-based grouped statements" do
+          results = ActiveLrs::Statement.group("timestamp", period: :week).distinct.count("actor.name")
+          expect(results).to eq({
+            "2025-W01" => 3
+          })
+        end
+
+        it "counts distinct actor names from month-based grouped statements" do
+          results = ActiveLrs::Statement.group("timestamp", period: :month).distinct.count("actor.name")
+          expect(results).to eq({
+            "2025-01" => 3
+          })
         end
       end
     end
