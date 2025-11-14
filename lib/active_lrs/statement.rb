@@ -216,7 +216,7 @@ module ActiveLrs
 
     # Counts statements, optionally applying a field to count.
     #
-    # @param field [String, Symbol, nil] Field to count (optional). Defaults to :id.
+    # @param field [String, Symbol, nil] Field to count (optional). Defaults to :id
     # @return [Integer, Hash] Returns an integer if no grouping is applied, or a hash if grouped
     def count(field = :id)
       @count = field
@@ -488,7 +488,7 @@ module ActiveLrs
       count != 0 ? (total / count) : nil
     end
 
-    # Groups an array of xAPI statements by the @group_by key, also selects distinct statements if @select and @distinct are specified.
+    # Groups an array of xAPI statements by the @group_by key, also filters statements before performing aggregation.
     #
     # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements to group
     # @return [Hash] a hash with group keys mapping to arrays of statements
@@ -503,7 +503,7 @@ module ActiveLrs
       end
 
       # Apply distinct filtering within each group
-      results = apply_count_filters(results) unless @distinct.nil?
+      results = apply_count_filters(results)
       results
     end
 
