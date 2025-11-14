@@ -119,14 +119,10 @@ module ActiveLrs
 
     # Shortcut for 'count' on a new instance.
     #
-    # @param conditions [Hash] Filtering conditions
-    # @return [Integer]
-    def self.count(conditions = {})
-      if conditions.empty?
-        new.count
-      else
-        new.where(conditions).count
-      end
+    # @param field [String] Field to count (optional)
+    # @return [Integer, Hash]
+    def self.count(field = nil)
+      new.count(field)
     end
 
     # Shortcut for 'group' on a new instance.
@@ -177,6 +173,7 @@ module ActiveLrs
       @limit = nil
       @group_by = nil
       @period = nil
+      @count = nil
       @distinct = nil
     end
 
@@ -217,17 +214,22 @@ module ActiveLrs
       self
     end
 
-    # Counts statements, optionally applying additional conditions.
+    # Counts statements, optionally applying a field to count.
     #
-    # @param conditions [Hash] Additional filtering conditions (optional)
+    # @param field [String] Field to count (optional)
     # @return [Integer, Hash] Returns an integer if no grouping is applied, or a hash if grouped
-    def count(conditions = {})
-      return where(conditions).count unless conditions.empty?
+    def count(field = nil)
+      @count = field || "id"
 
       results = to_a
-      return results.size unless @group_by
 
-      apply_group_count(results)
+      if @group_by.nil? && @distinct.nil?
+        return results.size
+      elsif @group_by.nil?
+        return filter_statements_to_count(results).size
+      else
+        return apply_group_count(results)
+      end
     end
 
     # Calculate the average value of the specified field from statements.
@@ -250,7 +252,7 @@ module ActiveLrs
       self
     end
 
-    # Specifies unique fields for select that selected fields should be distinct.
+    # Specifies count must count distinct statements based on a specified field.
     def distinct
       @distinct = true
       self
@@ -500,30 +502,39 @@ module ActiveLrs
         results[key] << statement
       end
 
-      results = apply_select_statements(results) unless @distinct.nil?
+      # Apply distinct filtering within each group
+      results = apply_count_filters(results) unless @distinct.nil?
       results
     end
 
-    # Selects distinct statements within each statement group based on @select key.
+    # Applies distinct filtering to each group of statements in a hash.
     #
-    # @param statement_hash [Hash] the hash of grouped statements
-    # @return [Hash] the hash with distinct statements in each group
-    def apply_select_statements(statement_hash)
-      statement_hash.each do |key, value|
-        selected_statements = []
-        select_keys = []
-        value.each do |statement|
-          current_key = dig_via_methods(statement, @select)
-          unless select_keys.include? current_key
-            selected_statements << statement
-            select_keys << current_key
-          end
-        end
-        statement_hash[key] = selected_statements
+    # @param statement_hash [Hash] the hash of grouped xAPI statements
+    # @return [Hash] the hash with distinct xAPI statements in each group
+    def apply_count_filters(statement_hash)
+      statement_hash.each do |key, statement|
+        statement_hash[key] = filter_statements_to_count(statement)
       end
       statement_hash
     end
 
+    # Helper to filter statements within an array based on @count field and @distinct restriction
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements
+    # @return statements [Array<ActiveLrs::Xapi::Statement>] the array with distinct xAPI statements
+    def filter_statements_to_count(statements)
+      selected_statements = []
+      selected_values = []
+      statements.each do |statement|
+        current_value = dig_via_methods(statement, @count)
+        next if current_value.nil?
+        unless selected_values.include?(current_value)
+          selected_statements << statement
+          selected_values << current_value
+        end
+      end
+      selected_statements
+    end
     # @!endgroup
   end
 end
