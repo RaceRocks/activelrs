@@ -119,9 +119,9 @@ module ActiveLrs
 
     # Shortcut for 'count' on a new instance.
     #
-    # @param field [String] Field to count (optional)
+    # @param field [String, Symbol, nil] Field to count (optional). Defaults to :id
     # @return [Integer, Hash]
-    def self.count(field = nil)
+    def self.count(field = :id)
       new.count(field)
     end
 
@@ -216,10 +216,10 @@ module ActiveLrs
 
     # Counts statements, optionally applying a field to count.
     #
-    # @param field [String] Field to count (optional)
+    # @param field [String, Symbol, nil] Field to count (optional). Defaults to :id.
     # @return [Integer, Hash] Returns an integer if no grouping is applied, or a hash if grouped
-    def count(field = nil)
-      @count = field || "id"
+    def count(field = :id)
+      @count = field
 
       results = to_a
 
@@ -252,7 +252,7 @@ module ActiveLrs
       self
     end
 
-    # Specifies count must count distinct statements based on a specified field.
+    # Enables distinct counting when performing `count`
     def distinct
       @distinct = true
       self
