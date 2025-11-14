@@ -121,6 +121,7 @@ RSpec.describe ActiveLrs::Statement do
 
       it "returns 0 if the specified field does not exist" do
         results = ActiveLrs::Statement.count("nonexistent.field")
+        expect(results).to eq(0)
       end
 
       it "counts simple queries" do

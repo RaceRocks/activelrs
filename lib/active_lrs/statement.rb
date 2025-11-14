@@ -223,7 +223,7 @@ module ActiveLrs
 
       results = to_a
 
-      if @group_by.nil? && @distinct.nil?
+      if @group_by.nil? && @distinct.nil? && @count == :id
         results.size
       elsif @group_by.nil?
         filter_statements_to_count(results).size
