@@ -224,11 +224,11 @@ module ActiveLrs
       results = to_a
 
       if @group_by.nil? && @distinct.nil?
-        return results.size
+        results.size
       elsif @group_by.nil?
-        return filter_statements_to_count(results).size
+        filter_statements_to_count(results).size
       else
-        return apply_group_count(results)
+        apply_group_count(results)
       end
     end
 
@@ -509,31 +509,26 @@ module ActiveLrs
 
     # Applies distinct filtering to each group of statements in a hash.
     #
-    # @param statement_hash [Hash] the hash of grouped xAPI statements
-    # @return [Hash] the hash with distinct xAPI statements in each group
+    # @param statement_hash [Hash<String, Array<ActiveLrs::Xapi::Statement>>] the hash of grouped xAPI statements
+    # @return [Hash] the same hash structure but with filtered xAPI statements
     def apply_count_filters(statement_hash)
-      statement_hash.each do |key, statement|
-        statement_hash[key] = filter_statements_to_count(statement)
-      end
-      statement_hash
+      statement_hash.transform_values { |statements| filter_statements_to_count(statements) }
     end
 
-    # Helper to filter statements within an array based on @count field and @distinct restriction
+    # Helper to filter statements within an array based on distinct-counting rules.
+    # Only the first occurrence of each unique @count value is kept if @distinct is true, returns all if false.
     #
-    # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements
-    # @return statements [Array<ActiveLrs::Xapi::Statement>] the array with distinct xAPI statements
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] an array of xAPI statements
+    # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
     def filter_statements_to_count(statements)
-      selected_statements = []
-      selected_values = []
-      statements.each do |statement|
+      seen = {}
+      statements.each_with_object([]) do |statement, selected_statements|
         current_value = dig_via_methods(statement, @count)
         next if current_value.nil?
-        unless selected_values.include?(current_value)
-          selected_statements << statement
-          selected_values << current_value
-        end
+        next if @distinct && seen.key?(current_value)
+        seen[current_value] = true
+        selected_statements << statement
       end
-      selected_statements
     end
     # @!endgroup
   end
