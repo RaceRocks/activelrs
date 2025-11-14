@@ -146,14 +146,6 @@ module ActiveLrs
       new.average(field)
     end
 
-    # Shortcut for 'select' on a new instance.
-    #
-    # @param key [String] Field to select statement on 
-    # @return [ActiveLrs::Statement]
-    def self.select(key)
-      new.select(key)
-    end
-
     # Shortcut for 'distinct' on a new instance.
     #
     # @return [ActiveLrs::Statement]
@@ -185,7 +177,6 @@ module ActiveLrs
       @limit = nil
       @group_by = nil
       @period = nil
-      @select = nil
       @distinct = nil
     end
 
@@ -259,15 +250,6 @@ module ActiveLrs
       self
     end
 
-    # Select statement attributes by a specified key.
-    # 
-    # @param key [String, Symbol] The field name to select.
-    # @return [ActiveLrs::Statement] self
-    def select(key)
-      @select = key
-      self
-    end
-
     # Specifies unique fields for select that selected fields should be distinct.
     def distinct
       @distinct = true
@@ -292,9 +274,6 @@ module ActiveLrs
       results = apply_where_conditions(results) unless @where_conditions.empty?
 
       if @group_by.nil?
-        # Apply select
-        results = apply_select(results) unless @select.nil?
-
         # Apply sorting
         results = apply_sort(results) unless @sort_key.nil?
 
@@ -380,23 +359,6 @@ module ActiveLrs
           conditions.all? { |key, value| match_condition?(result, key, value) }
         end
       end
-    end
-
-    # Selects attributes based on @select and @distinct
-    #
-    # @param results [Array] the array of statements to select from
-    # @return [Array] the selected attributes
-    def apply_select(results)
-      attributes = []
-      results.each do |result|
-        value = dig_via_methods(result, @select)
-        unless @distinct && attributes.include?(value)
-          unless value == nil
-            attributes << value
-          end
-        end
-      end
-      attributes
     end
 
     # Checks if a single result matches a specific key-value condition.
@@ -524,7 +486,7 @@ module ActiveLrs
       count != 0 ? (total / count) : nil
     end
 
-    # Groups an array of xAPI statements by the @group_by key, also selects distinct statements if @select and @distinct are specified. 
+    # Groups an array of xAPI statements by the @group_by key, also selects distinct statements if @select and @distinct are specified.
     #
     # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements to group
     # @return [Hash] a hash with group keys mapping to arrays of statements
@@ -538,12 +500,12 @@ module ActiveLrs
         results[key] << statement
       end
 
-      results = apply_select_statements(results) unless @select.nil? && @distinct.nil?
+      results = apply_select_statements(results) unless @distinct.nil?
       results
     end
 
-    # Selects distinct statements within each statement group based on @select key. 
-    # 
+    # Selects distinct statements within each statement group based on @select key.
+    #
     # @param statement_hash [Hash] the hash of grouped statements
     # @return [Hash] the hash with distinct statements in each group
     def apply_select_statements(statement_hash)
