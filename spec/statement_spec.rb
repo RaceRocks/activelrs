@@ -280,58 +280,24 @@ RSpec.describe ActiveLrs::Statement do
           })
         end
 
-        # TODO: Cut this later
-        it "counts verb IDs from grouped statements" do
-          results = ActiveLrs::Statement.group("object.id").count("verb.id")
-          puts("counts verb IDs from grouped statements: #{results.inspect}")
-          expect(results).to eq({
-            "http://example.org/courses/math101" => 4,
-            "http://example.org/courses/science201" => 2
-          })
-        end
-
         it "counts distinct verb IDs from grouped statements" do
           results = ActiveLrs::Statement.group("object.id").distinct.count("verb.id")
-          puts("counts distinct verb IDs from grouped statements: #{results.inspect}")
           expect(results).to eq({
             "http://example.org/courses/math101" => 3,
             "http://example.org/courses/science201" => 2
           })
         end
 
-        # TODO: Cut this later
-        it "counts distinct actor names from grouped statements" do
-          results = ActiveLrs::Statement.group("object.id").count("actor.name")
-          puts("counts actor names from grouped statements: #{results.inspect}")
-          expect(results).to eq({
-            "http://example.org/courses/math101" => 4,
-            "http://example.org/courses/science201" => 2
-          })
-        end
-
         it "counts distinct actor names from grouped statements" do
           results = ActiveLrs::Statement.group("object.id").distinct.count("actor.name")
-          puts("counts distinct actor names from grouped statements: #{results.inspect}")
           expect(results).to eq({
             "http://example.org/courses/math101" => 2,
             "http://example.org/courses/science201" => 2
           })
         end
 
-        # TODO: Cut this later
-        it "counts actor names from day-based grouped statements" do
-          results = ActiveLrs::Statement.group("timestamp", period: :day).count("actor.name")
-          puts("counts actor names from day-based grouped statements: #{results.inspect}")
-          expect(results).to eq({
-            "2025-01-01" => 3,
-            "2025-01-02" => 2,
-            "2025-01-03" => 1
-          })
-        end
-
         it "counts distinct actor names from day-based grouped statements" do
           results = ActiveLrs::Statement.group("timestamp", period: :day).distinct.count("actor.name")
-          puts("counts distinct actor names from day-based grouped statements: #{results.inspect}")
           expect(results).to eq({
             "2025-01-01" => 2,
             "2025-01-02" => 2,
@@ -339,35 +305,15 @@ RSpec.describe ActiveLrs::Statement do
           })
         end
 
-        # TODO: Cut this later
-        it "counts actor names from week-based grouped statements" do
-          results = ActiveLrs::Statement.group("timestamp", period: :week).count("actor.name")
-          puts("counts actor names from week-based grouped statements: #{results.inspect}")
-          expect(results).to eq({
-            "2025-W01" => 6
-          })
-        end
-
         it "counts distinct actor names from week-based grouped statements" do
           results = ActiveLrs::Statement.group("timestamp", period: :week).distinct.count("actor.name")
-          puts("counts distinct actor names from week-based grouped statements: #{results.inspect}")
           expect(results).to eq({
             "2025-W01" => 3
           })
         end
 
-        # TODO: Cut this later
-        it "counts actor names from month-based grouped statements" do
-          results = ActiveLrs::Statement.group("timestamp", period: :month).count("actor.name")
-          puts("counts actor names from month-based grouped statements: #{results.inspect}")
-          expect(results).to eq({
-            "2025-01" => 6
-          })
-        end
-
         it "counts distinct actor names from month-based grouped statements" do
           results = ActiveLrs::Statement.group("timestamp", period: :month).distinct.count("actor.name")
-          puts("counts distinct actor names from month-based grouped statements: #{results.inspect}")
           expect(results).to eq({
             "2025-01" => 3
           })
