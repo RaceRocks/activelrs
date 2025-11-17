@@ -226,7 +226,9 @@ module ActiveLrs
       if @group_by.nil? && @distinct.nil? && @count == :id
         results.size
       elsif @group_by.nil?
-        filter_statements_to_count(results).size
+        results = apply_attribute_filter(results) if @count
+        results = apply_distinct_filter(results) if @distinct
+        results.size
       else
         apply_group_count(results)
       end
