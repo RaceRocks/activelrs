@@ -527,11 +527,7 @@ module ActiveLrs
     # @param attribute [String, Symbol] the attribute to check for presence
     # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
     def apply_attribute_filter(statements, attribute = @count)
-      statements.each_with_object([]) do |statement, selected_statements|
-        current_value = dig_via_methods(statement, attribute)
-        next if current_value.nil?
-        selected_statements << statement
-      end
+      Array(statements).select { |s| !dig_via_methods(s, attribute).nil? }
     end
 
     # Helper to filter statements within an array based on distinct values of a specific attribute.
@@ -540,13 +536,11 @@ module ActiveLrs
     # @param attribute [String, Symbol] the attribute to check for distinctness
     # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
     def apply_distinct_filter(statements, attribute = @count)
-      seen = {}
-      statements.each_with_object([]) do |statement, selected_statements|
-        current_value = dig_via_methods(statement, attribute)
-        next if current_value.nil? || seen.key?(current_value)
-        seen[current_value] = true
-        selected_statements << statement
-      end
+      Array(statements)
+      .map { |s| [ s, dig_via_methods(s, attribute) ] }
+      .select { |_, value| !value.nil? }
+      .map(&:first)
+      .uniq { |s| dig_via_methods(s, attribute) }
     end
     # @!endgroup
   end
