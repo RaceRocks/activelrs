@@ -493,7 +493,7 @@ module ActiveLrs
       count != 0 ? (total / count) : nil
     end
 
-    # Groups an array of xAPI statements by the @group_by key, also filters statements before performing aggregation.
+    # Groups an array of xAPI statements by the @group_by key. 
     #
     # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements to group
     # @return [Hash] a hash with group keys mapping to arrays of statements
