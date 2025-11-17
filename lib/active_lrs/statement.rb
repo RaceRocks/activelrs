@@ -512,7 +512,11 @@ module ActiveLrs
     # @param statement_hash [Hash<String, Array<ActiveLrs::Xapi::Statement>>] the hash of grouped xAPI statements
     # @return [Hash] the same hash structure but with filtered xAPI statements
     def apply_statement_filters(statement_hash)
-      statement_hash.transform_values { |statements| filter_statements_to_count(statements) }
+      statement_hash.transform_values do |statements|
+        filtered_statements = apply_attribute_filter(statements)
+        filtered_statements = apply_distinct_filter(statements) if @distinct
+        filtered_statements
+      end
     end
 
     # Helper to filter statements within an array based on distinct-counting rules.
@@ -526,6 +530,34 @@ module ActiveLrs
         current_value = dig_via_methods(statement, @count)
         next if current_value.nil?
         next if @distinct && seen.key?(current_value)
+        seen[current_value] = true
+        selected_statements << statement
+      end
+    end
+
+    # Helper to filter statements within an array based on the presence of a specific attribute.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] an array of xAPI statements
+    # @param attribute [String, Symbol] the attribute to check for presence
+    # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
+    def apply_attribute_filter(statements, attribute = @count)
+      statements.each_with_object([]) do |statement, selected_statements|
+        current_value = dig_via_methods(statement, attribute)
+        next if current_value.nil?
+        selected_statements << statement
+      end
+    end
+
+    # Helper to filter statements within an array based on distinct values of a specific attribute.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] an array of xAPI statements
+    # @param attribute [String, Symbol] the attribute to check for distinctness
+    # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
+    def apply_distinct_filter(statements, attribute = @count)
+      seen = {}
+      statements.each_with_object([]) do |statement, selected_statements|
+        current_value = dig_via_methods(statement, attribute)
+        next if current_value.nil? || seen.key?(current_value)
         seen[current_value] = true
         selected_statements << statement
       end
