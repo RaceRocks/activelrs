@@ -226,7 +226,7 @@ module ActiveLrs
       if @group_by.nil? && @distinct.nil? && @count == :id
         results.size
       elsif @group_by.nil?
-        results = apply_attribute_filter(results) if @count
+        results = apply_present_filter(results) if @count
         results = apply_distinct_filter(results) if @distinct
         results.size
       else
@@ -493,7 +493,7 @@ module ActiveLrs
       count != 0 ? (total / count) : nil
     end
 
-    # Groups an array of xAPI statements by the @group_by key. 
+    # Groups an array of xAPI statements by the @group_by key.
     #
     # @param statements [Array<ActiveLrs::Xapi::Statement>] the array of xAPI statements to group
     # @return [Hash] a hash with group keys mapping to arrays of statements
@@ -515,7 +515,7 @@ module ActiveLrs
     # @return [Hash] the same hash structure but with filtered xAPI statements
     def apply_statement_filters(statement_hash)
       statement_hash.transform_values do |statements|
-        filtered_statements = apply_attribute_filter(statements)
+        filtered_statements = apply_present_filter(statements)
         filtered_statements = apply_distinct_filter(statements) if @distinct
         filtered_statements
       end
@@ -526,7 +526,7 @@ module ActiveLrs
     # @param statements [Array<ActiveLrs::Xapi::Statement>] an array of xAPI statements
     # @param attribute [String, Symbol] the attribute to check for presence
     # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
-    def apply_attribute_filter(statements, attribute = @count)
+    def apply_present_filter(statements, attribute = @count)
       Array(statements).select { |s| !dig_via_methods(s, attribute).nil? }
     end
 
