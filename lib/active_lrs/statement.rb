@@ -519,22 +519,6 @@ module ActiveLrs
       end
     end
 
-    # Helper to filter statements within an array based on distinct-counting rules.
-    # Only the first occurrence of each unique @count value is kept if @distinct is true, returns all if false.
-    #
-    # @param statements [Array<ActiveLrs::Xapi::Statement>] an array of xAPI statements
-    # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
-    def filter_statements_to_count(statements)
-      seen = {}
-      statements.each_with_object([]) do |statement, selected_statements|
-        current_value = dig_via_methods(statement, @count)
-        next if current_value.nil?
-        next if @distinct && seen.key?(current_value)
-        seen[current_value] = true
-        selected_statements << statement
-      end
-    end
-
     # Helper to filter statements within an array based on the presence of a specific attribute.
     #
     # @param statements [Array<ActiveLrs::Xapi::Statement>] an array of xAPI statements
