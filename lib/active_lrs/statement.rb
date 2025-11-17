@@ -119,14 +119,10 @@ module ActiveLrs
 
     # Shortcut for 'count' on a new instance.
     #
-    # @param conditions [Hash] Filtering conditions
-    # @return [Integer]
-    def self.count(conditions = {})
-      if conditions.empty?
-        new.count
-      else
-        new.where(conditions).count
-      end
+    # @param field [String, Symbol, nil] Field to count (optional). Defaults to :id
+    # @return [Integer, Hash]
+    def self.count(field = :id)
+      new.count(field)
     end
 
     # Shortcut for 'group' on a new instance.
@@ -144,6 +140,13 @@ module ActiveLrs
     # @return [ActiveLrs::Statement]
     def self.average(field)
       new.average(field)
+    end
+
+    # Shortcut for 'distinct' on a new instance.
+    #
+    # @return [ActiveLrs::Statement]
+    def self.distinct
+      new.distinct
     end
 
     # Shortcut for 'fetch_localized_value' on a new instance.
@@ -170,6 +173,8 @@ module ActiveLrs
       @limit = nil
       @group_by = nil
       @period = nil
+      @count = nil
+      @distinct = nil
     end
 
     # Adds filtering conditions.
@@ -209,17 +214,25 @@ module ActiveLrs
       self
     end
 
-    # Counts statements, optionally applying additional conditions.
+    # Counts statements, optionally applying a field to count.
+    # If a field is provided, only statements where that field is not nil are counted.
     #
-    # @param conditions [Hash] Additional filtering conditions (optional)
+    # @param field [String, Symbol, nil] Field to count (optional). Defaults to :id
     # @return [Integer, Hash] Returns an integer if no grouping is applied, or a hash if grouped
-    def count(conditions = {})
-      return where(conditions).count unless conditions.empty?
+    def count(field = :id)
+      @count = field
 
       results = to_a
-      return results.size unless @group_by
 
-      apply_group_count(results)
+      if @group_by.nil? && @distinct.nil? && @count == :id
+        results.size
+      elsif @group_by.nil?
+        results = apply_present_filter(results) if @count
+        results = apply_distinct_filter(results) if @distinct
+        results.size
+      else
+        apply_group_count(results)
+      end
     end
 
     # Calculate the average value of the specified field from statements.
@@ -239,6 +252,12 @@ module ActiveLrs
     def group(field, period: nil)
       @group_by = field
       @period = period
+      self
+    end
+
+    # Enables distinct counting when performing `count`
+    def distinct
+      @distinct = true
       self
     end
 
@@ -442,7 +461,10 @@ module ActiveLrs
     def apply_aggregate(statements)
       grouped_results = apply_group(statements)
 
-      results = grouped_results.transform_values do |group_statements|
+      # Apply filtering to each group of statements
+      filtered_grouped_results = apply_statement_filters(grouped_results)
+
+      results = filtered_grouped_results.transform_values do |group_statements|
         yield(group_statements)
       end
 
@@ -488,6 +510,37 @@ module ActiveLrs
       results
     end
 
+    # Applies distinct filtering to each group of statements in a hash.
+    #
+    # @param statement_hash [Hash<String, Array<ActiveLrs::Xapi::Statement>>] the hash of grouped xAPI statements
+    # @return [Hash] the same hash structure but with filtered xAPI statements
+    def apply_statement_filters(statement_hash)
+      statement_hash.transform_values do |statements|
+        filtered_statements = apply_present_filter(statements)
+        filtered_statements = apply_distinct_filter(statements) if @distinct
+        filtered_statements
+      end
+    end
+
+    # Helper to filter statements within an array based on the presence of a specific attribute.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] an array of xAPI statements
+    # @param attribute [String, Symbol] the attribute to check for presence
+    # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
+    def apply_present_filter(statements, attribute = @count)
+      Array(statements).select { |s| !dig_via_methods(s, attribute.to_s).nil? }
+    end
+
+    # Helper to filter statements within an array based on distinct values of a specific attribute.
+    #
+    # @param statements [Array<ActiveLrs::Xapi::Statement>] an array of xAPI statements
+    # @param attribute [String, Symbol] the attribute to check for distinctness
+    # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
+    def apply_distinct_filter(statements, attribute = @count)
+      Array(statements)
+                      .reject { |s| dig_via_methods(s, attribute.to_s).nil? }
+                      .uniq { |s| dig_via_methods(s, attribute.to_s) }
+    end
     # @!endgroup
   end
 end
