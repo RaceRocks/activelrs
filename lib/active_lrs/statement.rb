@@ -214,7 +214,8 @@ module ActiveLrs
       self
     end
 
-    # Counts statements, optionally applying a field to count.
+    # Counts statements, optionally applying a field to count. 
+    # If a field is provided, only statements where that field is not nil are counted.
     #
     # @param field [String, Symbol, nil] Field to count (optional). Defaults to :id
     # @return [Integer, Hash] Returns an integer if no grouping is applied, or a hash if grouped
