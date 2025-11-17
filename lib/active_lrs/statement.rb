@@ -214,7 +214,7 @@ module ActiveLrs
       self
     end
 
-    # Counts statements, optionally applying a field to count. 
+    # Counts statements, optionally applying a field to count.
     # If a field is provided, only statements where that field is not nil are counted.
     #
     # @param field [String, Symbol, nil] Field to count (optional). Defaults to :id
@@ -528,7 +528,7 @@ module ActiveLrs
     # @param attribute [String, Symbol] the attribute to check for presence
     # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
     def apply_present_filter(statements, attribute = @count)
-      Array(statements).select { |s| !dig_via_methods(s, attribute).nil? }
+      Array(statements).select { |s| !dig_via_methods(s, attribute.to_s).nil? }
     end
 
     # Helper to filter statements within an array based on distinct values of a specific attribute.
@@ -538,10 +538,8 @@ module ActiveLrs
     # @return [Array<ActiveLrs::Xapi::Statement>] a filtered array of xAPI statements
     def apply_distinct_filter(statements, attribute = @count)
       Array(statements)
-      .map { |s| [ s, dig_via_methods(s, attribute) ] }
-      .select { |_, value| !value.nil? }
-      .map(&:first)
-      .uniq { |s| dig_via_methods(s, attribute) }
+                      .reject { |s| dig_via_methods(s, attribute.to_s).nil? }
+                      .uniq { |s| dig_via_methods(s, attribute.to_s) }
     end
     # @!endgroup
   end
