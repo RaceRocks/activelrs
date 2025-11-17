@@ -458,7 +458,10 @@ module ActiveLrs
     def apply_aggregate(statements)
       grouped_results = apply_group(statements)
 
-      results = grouped_results.transform_values do |group_statements|
+      # Apply filtering to each group of statements
+      filtered_grouped_results = apply_statement_filters(grouped_results)
+
+      results = filtered_grouped_results.transform_values do |group_statements|
         yield(group_statements)
       end
 
@@ -501,9 +504,6 @@ module ActiveLrs
         key = format_group_by_timestamp(key, @period) if (@group_by.to_s == "timestamp") && @period
         results[key] << statement
       end
-
-      # Apply distinct filtering within each group
-      results = apply_count_filters(results)
       results
     end
 
@@ -511,7 +511,7 @@ module ActiveLrs
     #
     # @param statement_hash [Hash<String, Array<ActiveLrs::Xapi::Statement>>] the hash of grouped xAPI statements
     # @return [Hash] the same hash structure but with filtered xAPI statements
-    def apply_count_filters(statement_hash)
+    def apply_statement_filters(statement_hash)
       statement_hash.transform_values { |statements| filter_statements_to_count(statements) }
     end
 
