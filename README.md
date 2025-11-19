@@ -1,5 +1,16 @@
 # ActiveLRS
 
+> [!WARNING]
+> xAPI Profile Server Sunsetting (Updated Nov 18, 2025)
+> 
+> ADL has officially sunset their public xAPI Profile Server, which our `active_lrs:statement` generator relies on to fetch profile documents.
+> As a result, the statement generator will no longer function correctly when attempting to retrieve xAPI Profiles via the ADL service.
+> 
+> We are currently evaluating alternative options for accessing publicly available xAPI Profiles.
+> If you know of any public or community-maintained xAPI Profile servers, or operate one yourself, we would love to hear from you—please open an issue or start a discussion in this repository.
+> 
+> Thank you for your patience as we work on restoring this functionality.
+
 ActiveLRS is a lightweight Rails gem for working with [xAPI (Experience API)](https://experienceapi.com) data stored in a Learning Record Store (LRS).  
 
 It can generate plain Rails model classes (independent of ActiveRecord) and matching RSpec test files directly from an **xAPI profile**. An xAPI profile defines the vocabulary and structure for specific learning or activity events.  
